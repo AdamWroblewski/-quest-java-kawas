@@ -19,9 +19,22 @@ public class GameRandom {
 		return rand.nextInt(max - min) + min;
 	}
 
-	public int randMove(){
-		double random = rand.nextDouble()*360.0;
+	public int randMove(int actorX, int actorY, int playerX, int playerY){
+		double random = rand.nextDouble()*360.0, dy, dx, maxDxDy;
+		dx = playerX - actorX;
+		dy = playerY - actorY;
+		maxDxDy = Math.max(dx, dy);
 
-		return 0;
+		dx = dx/maxDxDy*directionToPlayer;
+		dy = dy/maxDxDy*directionToPlayer;
+
+		dx = dx + Math.cos(random);
+		dy = dy + Math.sin(random);
+
+		int direction = 1;// like in CSS: 0 - up, 1 - right, 2 - down, 3 - left;
+		if(Math.abs(dy) > Math.abs(dy) ) direction = 0;
+		if(dx < 0.0 || dy < 0.0) direction += 2;
+
+		return direction;
 	}
 }
