@@ -13,7 +13,27 @@ public class Player extends Actor {
         return "player";
     }
 
+    public Actor shoot(){
+        Cell cellCheck = cellByDirection();
+        if(cellCheck == null)
+            return null;
+
+        return cellCheck.getActor();
+    }
     public Actor gloryKill(){
+        Cell cellCheck = cellByDirection();
+        if(cellCheck == null)
+            return null;
+
+        Actor actor = cellCheck.getActor();
+        if(actor != null ) {
+            cellCheck.setActor(null);
+        }
+
+        return actor;
+    }
+
+    private Cell cellByDirection(){
         Cell cellCheck;
 
         switch( direction.getDirection() ){
@@ -33,11 +53,7 @@ public class Player extends Actor {
                 return null;
         }
 
-        Actor actor = cellCheck.getActor();
-        if(actor != null ) {
-            cellCheck.setActor(null);
-        }
-
-        return actor;
+        return cellCheck;
     }
+
 }
