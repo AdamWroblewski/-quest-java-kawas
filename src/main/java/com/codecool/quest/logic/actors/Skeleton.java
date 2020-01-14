@@ -6,13 +6,13 @@ import com.codecool.quest.logic.actors.Actor;
 
 public class Skeleton extends Actor {
     private boolean staggered;
-    private boolean direction;
+    private boolean wasRight;
 
     public Skeleton(Cell cell) {
         super(cell);
         staggered = false;
 
-        direction = true;
+        wasRight = true;
     }
 
     @Override
@@ -22,12 +22,12 @@ public class Skeleton extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        if(direction) {
+        if(wasRight) {
             super.move(1, 0);
-            direction = false;
+            wasRight = false;
         } else {
             super.move(-1, 0);
-            direction = true;
+            wasRight = true;
         }
 
 
