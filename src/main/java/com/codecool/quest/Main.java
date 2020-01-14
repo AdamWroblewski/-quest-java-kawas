@@ -86,6 +86,10 @@ public class Main extends Application {
                 map.kill();
                 refresh();
                 break;
+            case SPACE:
+                map.shot();
+                refresh();
+                break;
         }
     }
 

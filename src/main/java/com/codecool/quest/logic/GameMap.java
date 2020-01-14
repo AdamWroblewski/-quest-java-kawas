@@ -49,6 +49,12 @@ public class GameMap {
             iter.next().move(1, 1);
         }
     }
+
+    public void shot(){
+        Actor actor = player.shoot();
+        Skeleton monster = (Skeleton) actor;
+        monster.setStaggerState();
+    }
     public boolean kill(){
         Actor actor = player.gloryKill();
         Skeleton monster = (Skeleton) actor;
