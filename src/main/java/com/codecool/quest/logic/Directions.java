@@ -2,10 +2,10 @@ package com.codecool.quest.logic;
 
 public enum Directions {
 	INPLACE(0),
-	UP(1),
-	RIGHT(2),
-	DOWN(3),
-	LEFT(4);
+	UP(1),// (dx, dy) = {0, -1;};
+	RIGHT(2),// 1, 0;
+	DOWN(3),// 0, 1;
+	LEFT(4);// -1, 0;
 
 	private int direction;
 
@@ -25,7 +25,10 @@ public enum Directions {
 		return direction;
 	}
 	public void setDirection(int dx, int dy){
-		if(dy == 0) direction = (dx > 0)?2:4;
+		if(dx == 0 && dy == 0)
+			direction = 0;
+		else if(dy == 0)
+			direction = (dx > 0)?2:4;
 		else
 			direction = (dy < 0)?1:3;
 	}
