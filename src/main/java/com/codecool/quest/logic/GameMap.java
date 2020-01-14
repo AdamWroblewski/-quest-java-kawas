@@ -1,5 +1,6 @@
 package com.codecool.quest.logic;
 
+import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 
@@ -49,9 +50,8 @@ public class GameMap {
         }
     }
     public boolean kill(){
-        Cell cell = new Cell(this, 0, 0, CellType.FLOOR);
-        player.gloryKill(cell);
-        Skeleton monster = (Skeleton) cell.getActor();
+        Actor actor = player.gloryKill();
+        Skeleton monster = (Skeleton) actor;
         monsters.remove(monster);
         return true;
     }
