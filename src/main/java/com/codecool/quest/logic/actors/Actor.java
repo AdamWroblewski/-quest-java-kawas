@@ -29,6 +29,9 @@ public abstract class Actor implements Drawable {
     public Cell getCell() {
         return cell;
     }
+    public void setCEll(Cell newCell){
+        cell = newCell;
+    }
 
     public int getX() {
         return cell.getX();
