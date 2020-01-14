@@ -18,7 +18,6 @@ public class Player extends Actor {
         cellRight = cell.getNeighbor(1, 0);
         cellDown = cell.getNeighbor(0, 1);
         cellLeft = cell.getNeighbor(-1, 0);
-        
 
         return true;
     }

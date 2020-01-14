@@ -11,6 +11,7 @@ public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
         super(cell);
         staggered = false;
+
         direction = true;
     }
 
