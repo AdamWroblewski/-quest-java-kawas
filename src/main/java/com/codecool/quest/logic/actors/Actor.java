@@ -7,7 +7,7 @@ import com.codecool.quest.logic.Drawable;
 
 public abstract class Actor implements Drawable {
     protected Cell cell;
-    protected Directions direction;
+    protected Directions direction = Directions.INPLACE;
     private int health = 10;
 
     public Actor(Cell cell) {
