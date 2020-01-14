@@ -18,18 +18,14 @@ public class Skeleton extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        Cell currentCell = getCell();
-        Cell nextCell = currentCell.getNeighbor(dx, dy);
         if(direction) {
-            nextCell = currentCell.getNeighbor(1, 0);
+            super.move(1, 0);
             direction = false;
         } else {
-            nextCell = currentCell.getNeighbor(-1, 0);
+            super.move(-1, 0);
             direction = true;
         }
 
-        currentCell.setActor(null);
-        nextCell.setActor(this);
-        setCEll(nextCell);
+
     }
 }
