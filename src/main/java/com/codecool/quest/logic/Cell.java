@@ -1,10 +1,12 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.inventory.Item;
 
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
+    private Item item;
     private GameMap gameMap;
     private int x, y;
 
@@ -27,8 +29,16 @@ public class Cell implements Drawable {
         this.actor = actor;
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
     public Actor getActor() {
         return actor;
+    }
+
+    public Item getItem() {
+        return item;
     }
 
     public Cell getNeighbor(int dx, int dy) {
