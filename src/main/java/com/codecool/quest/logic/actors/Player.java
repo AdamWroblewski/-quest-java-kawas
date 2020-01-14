@@ -26,11 +26,13 @@ public class Player extends Actor {
             return null;
 
         Actor actor = cellCheck.getActor();
-        if(actor != null ) {
+        Skeleton monster = (Skeleton) actor;
+        if(monster != null && monster.isStaggered() ){
             cellCheck.setActor(null);
+            return actor;
         }
 
-        return actor;
+        return null;
     }
 
     private Cell cellByDirection(){
