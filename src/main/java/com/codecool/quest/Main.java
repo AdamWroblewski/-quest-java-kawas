@@ -1,6 +1,7 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
@@ -10,12 +11,15 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
+    Cell cell;
     GameMap map = MapLoader.loadMap();
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
@@ -45,9 +49,16 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
+        scene.setOnMouseClicked(this::mouseEvent);
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
+    }
+
+    private void mouseEvent(MouseEvent mouseEvent) {
+        System.out.println("Hello");
+//        System.out.println(cell.getTileName());
+//        if (cell.getType() == )
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {

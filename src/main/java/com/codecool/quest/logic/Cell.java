@@ -4,6 +4,7 @@ import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.inventory.Item;
 
 public class Cell implements Drawable {
+
     private CellType type;
     private Actor actor;
     private Item item;
