@@ -6,8 +6,12 @@ import com.codecool.quest.logic.actors.Actor;
 
 public class Skeleton extends Actor {
     private boolean direction;
+    private boolean staggered;
+
     public Skeleton(Cell cell) {
         super(cell);
+        staggered = false;
+
         direction = true;
     }
 
