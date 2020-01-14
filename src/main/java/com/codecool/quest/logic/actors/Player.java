@@ -13,11 +13,28 @@ public class Player extends Actor {
     }
 
     public boolean gloryKill(){
-        Cell cell = getCell(), cellUp, cellRight, cellDown, cellLeft;
-        cellUp = cell.getNeighbor(0, -1);
-        cellRight = cell.getNeighbor(1, 0);
-        cellDown = cell.getNeighbor(0, 1);
-        cellLeft = cell.getNeighbor(-1, 0);
+        Cell cellCheck;
+
+        switch(direction){
+            case UP:
+                cellCheck = cell.getNeighbor(0, -1);
+                break;
+            case RIGHT:
+                cellCheck = cell.getNeighbor(1, 0);
+                break;
+            case DOWN:
+                cellCheck = cell.getNeighbor(0, 1);
+                break;
+            case LEFT:
+                cellCheck = cell.getNeighbor(-1, 0);
+                break;
+            default:
+                return false;
+        }
+
+        if(cellCheck.getActor() != null )
+            cellCheck.setActor(null);
+
 
         return true;
     }

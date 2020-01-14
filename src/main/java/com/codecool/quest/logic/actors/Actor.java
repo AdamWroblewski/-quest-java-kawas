@@ -2,10 +2,12 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.Drawable;
 
 public abstract class Actor implements Drawable {
-    private Cell cell;
+    protected Cell cell;
+    protected Directions direction;
     private int health = 10;
 
     public Actor(Cell cell) {
@@ -22,6 +24,7 @@ public abstract class Actor implements Drawable {
         } else if (nextCell.getType().equals(CellType.CLOSEDDOOR)){
             nextCell.setType(CellType.OPENEDDOOR);
         }
+        direction.setDirection(dx, dy);
     }
 
     public int getHealth() {
