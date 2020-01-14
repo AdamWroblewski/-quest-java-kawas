@@ -12,7 +12,7 @@ public class Player extends Actor {
         return "player";
     }
 
-    public boolean gloryKill(){
+    public boolean gloryKill(Cell setCell){
         Cell cellCheck;
 
         switch(direction){
@@ -32,8 +32,10 @@ public class Player extends Actor {
                 return false;
         }
 
-        if(cellCheck.getActor() != null )
+        if(cellCheck.getActor() != null ) {
             cellCheck.setActor(null);
+            setCell = cellCheck;
+        }
 
 
         return true;
