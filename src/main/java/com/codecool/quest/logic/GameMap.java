@@ -48,6 +48,13 @@ public class GameMap {
             iter.next().move(1, 1);
         }
     }
+    public boolean kill(){
+        Cell cell = new Cell(this, 0, 0, CellType.FLOOR);
+        player.gloryKill(cell);
+        Skeleton monster = (Skeleton) cell.getActor();
+        monsters.remove(monster);
+        return true;
+    }
 
     public int getWidth() {
         return width;
