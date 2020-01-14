@@ -52,11 +52,17 @@ public class GameMap {
 
     public void shot(){
         Actor actor = player.shoot();
+        if(actor == null)
+            return;
+
         Skeleton monster = (Skeleton) actor;
         monster.setStaggerState();
     }
     public boolean kill(){
         Actor actor = player.gloryKill();
+        if(actor == null)
+            return false;
+
         Skeleton monster = (Skeleton) actor;
         monsters.remove(monster);
         return true;
