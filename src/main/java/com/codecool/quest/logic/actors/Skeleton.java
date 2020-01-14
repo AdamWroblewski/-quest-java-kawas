@@ -6,6 +6,7 @@ import com.codecool.quest.logic.actors.Actor;
 
 public class Skeleton extends Actor {
     private boolean staggered;
+    private String stateName = "skeleton";
     private boolean wasRight;
 
     public Skeleton(Cell cell) {
@@ -17,11 +18,14 @@ public class Skeleton extends Actor {
 
     @Override
     public String getTileName() {
-        return "skeleton";
+        return stateName;
     }
 
     @Override
     public void move(int dx, int dy) {
+        if(staggered)
+            return;
+
         if(wasRight) {
             super.move(1, 0);
             wasRight = false;
@@ -30,6 +34,14 @@ public class Skeleton extends Actor {
             wasRight = true;
         }
 
+    }
 
+    public void setStaggerState(){
+        staggered = true;
+        stateName = "staggerState";
+    }
+    public void unsetStaggerState(){
+        staggered = false;
+        stateName = "skeleton";
     }
 }
