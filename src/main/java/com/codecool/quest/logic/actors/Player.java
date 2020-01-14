@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.Directions;
 
 
 public class Player extends Actor {
@@ -12,32 +13,31 @@ public class Player extends Actor {
         return "player";
     }
 
-    public boolean gloryKill(Cell setCell){
+    public Actor gloryKill(){
         Cell cellCheck;
 
-        switch(direction){
-            case UP:
+        switch( direction.getDirection() ){
+            case 1:
                 cellCheck = cell.getNeighbor(0, -1);
                 break;
-            case RIGHT:
+            case 2:
                 cellCheck = cell.getNeighbor(1, 0);
                 break;
-            case DOWN:
+            case 3:
                 cellCheck = cell.getNeighbor(0, 1);
                 break;
-            case LEFT:
+            case 4:
                 cellCheck = cell.getNeighbor(-1, 0);
                 break;
             default:
-                return false;
+                return null;
         }
 
-        if(cellCheck.getActor() != null ) {
+        Actor actor = cellCheck.getActor();
+        if(actor != null ) {
             cellCheck.setActor(null);
-            setCell = cellCheck;
         }
 
-
-        return true;
+        return actor;
     }
 }
