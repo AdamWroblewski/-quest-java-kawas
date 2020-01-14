@@ -1,4 +1,4 @@
-package com.codecool.quest.logic.actors;
+package com.codecool.quest.logic;
 
 import java.util.Random;
 
