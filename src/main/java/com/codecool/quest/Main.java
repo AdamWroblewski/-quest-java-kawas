@@ -82,6 +82,10 @@ public class Main extends Application {
                 map.getPlayer().move(1,0);
                 refresh();
                 break;
+            case F:
+                map.kill();
+                refresh();
+                break;
         }
     }
 
