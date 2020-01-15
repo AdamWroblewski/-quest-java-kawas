@@ -70,26 +70,27 @@ public class Main extends Application {
 
     private void onKeyPressed(KeyEvent keyEvent) {
         Cell cell = new Cell(map, map.getPlayer().getX(), map.getPlayer().getY());
+        int moveX = 0;
+        int moveY = 0;
         switch (keyEvent.getCode()) {
             case UP:
-                map.getPlayer().move(0, -1);
+                map.getPlayer().move(moveX, --moveY);
                 refresh();
                 break;
             case DOWN:
-                map.getPlayer().move(0, 1);
+                map.getPlayer().move(moveX, ++moveY);
                 refresh();
                 break;
             case LEFT:
-                map.getPlayer().move(-1, 0);
+                map.getPlayer().move(--moveX, moveY);
                 refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(++moveX,moveY);
                 refresh();
                 break;
         }
-        System.out.println(cell.getNeighbor(0, -1).getType());
-        if (cell.getNeighbor(0, -1).getType().equals(CellType.FINISHMAP)){
+        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.FINISHMAP)){
             map = MapLoader.loadMap(mapList.remove(0));
             refresh();
         }
