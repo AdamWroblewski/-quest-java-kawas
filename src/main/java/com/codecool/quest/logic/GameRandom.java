@@ -27,17 +27,22 @@ public class GameRandom {
 			dx = playerX - actorX;
 			dy = playerY - actorY;
 			distance = dx * dx + dy * dy;
-			dx = dx + dx / distance * directionToPlayer;
-			dy = dy + dy / distance * directionToPlayer;
+			dx = dx / distance * directionToPlayer;
+			dy = dy / distance * directionToPlayer;
 		} else
 			dx = dy = 0.0;
 
 		dx = dx + Math.cos(angle);
 		dy = dy + Math.sin(angle);
 
-		int direction = 2;// like in CSS: 1 - up, 2 - right, 3 - down, 4 - left;
-		if(Math.abs(dy) > Math.abs(dx) ) direction = 1;
-		if(dx < 0.0 || dy < 0.0) direction += 2;
+		int direction = 4;// like in CSS: 1 - up, 2 - right, 3 - down, 4 - left;
+		if(Math.abs(dy) > Math.abs(dx) ){
+			if(dy > 0.0) direction = 3;
+			else direction = 1;
+		} else {
+			if(dx > 0.0) direction = 2;
+			else direction = 4;
+		}
 
 		switch(direction){
 			case 1:
