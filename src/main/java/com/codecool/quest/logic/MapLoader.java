@@ -62,7 +62,7 @@ public class MapLoader {
                             new Button(cell);
                             break;
                         case 'f':
-                            cell.setType(CellType.FINISHMAP);
+                            cell.setType(CellType.STAIRSDOWN);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

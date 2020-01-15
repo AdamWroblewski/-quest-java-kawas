@@ -90,7 +90,7 @@ public class Main extends Application {
                 refresh();
                 break;
         }
-        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.FINISHMAP)){
+        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.STAIRSDOWN)){
             map = MapLoader.loadMap(mapList.remove(0));
             refresh();
         }
