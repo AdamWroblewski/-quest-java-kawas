@@ -23,14 +23,17 @@ import java.util.List;
 
 public class Main extends Application {
 
+    private final int screenWidth = 25;
+    private final int screenHeight = 20;
     List<String> mapList = new ArrayList<>(){{
+        add("/map3.txt");
         add("/map.txt");
         add("/map2.txt");
     }};
     GameMap map = MapLoader.loadMap(mapList.remove(0));
     Canvas canvas = new Canvas(
-            map.getWidth() * Tiles.TILE_WIDTH,
-            map.getHeight() * Tiles.TILE_WIDTH);
+            screenWidth * Tiles.TILE_WIDTH,
+            screenHeight * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
 
