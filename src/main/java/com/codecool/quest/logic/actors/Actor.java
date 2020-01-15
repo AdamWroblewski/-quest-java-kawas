@@ -8,7 +8,7 @@ import com.codecool.quest.logic.Drawable;
 public abstract class Actor implements Drawable {
     protected Cell cell;
     protected Directions direction = Directions.INPLACE;
-    private int health = 10;
+    protected int health = 100;
 
     public Actor(Cell cell) {
         this.cell = cell;

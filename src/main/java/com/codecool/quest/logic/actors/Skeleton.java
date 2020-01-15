@@ -11,6 +11,7 @@ public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
         super(cell);
         stunned = false;
+        health = 50;
 
         wasRight = true;
     }
