@@ -18,6 +18,12 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
+    public Cell(GameMap gameMap, int x, int y) {
+        this.gameMap = gameMap;
+        this.x = x;
+        this.y = y;
+    }
+
     public CellType getType() {
         return type;
     }
