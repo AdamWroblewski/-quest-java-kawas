@@ -6,9 +6,9 @@ public class GameRandom {
 	private static Random rand;
 	private double directionToPlayer;
 
-	GameRandom(){
+	public GameRandom(){
 		rand = new Random();
-		directionToPlayer = 0.0;
+		directionToPlayer = 0.5;
 
 	}
 
@@ -19,7 +19,7 @@ public class GameRandom {
 		return rand.nextInt(max - min) + min;
 	}
 
-	public int randMove(int actorX, int actorY, int playerX, int playerY){
+	public Directions randMove(int actorX, int actorY, int playerX, int playerY){
 		double angle = rand.nextDouble()*360.0, dy, dx, distance;
 		angle = Math.toRadians(angle);
 
@@ -39,6 +39,17 @@ public class GameRandom {
 		if(Math.abs(dy) > Math.abs(dx) ) direction = 1;
 		if(dx < 0.0 || dy < 0.0) direction += 2;
 
-		return direction;
+		switch(direction){
+			case 1:
+				return Directions.UP;
+			case 2:
+				return Directions.RIGHT;
+			case 3:
+				return Directions.DOWN;
+			case 4:
+				return Directions.LEFT;
+		}
+
+		return Directions.INPLACE;
 	}
 }
