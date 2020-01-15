@@ -35,6 +35,19 @@ public class GameRandom {
 		dx = dx + Math.cos(angle);
 		dy = dy + Math.sin(angle);
 
+		return stepVectorToDirection(dx, dy);
+	}
+
+	public Directions randStep(){
+		double angle = rand.nextDouble()*360.0, dy, dx;
+		angle = Math.toRadians(angle);
+		dx = Math.cos(angle);
+		dy = Math.sin(angle);
+
+		return stepVectorToDirection(dx, dy);
+	}
+
+	private Directions stepVectorToDirection(final double dx, final double dy){
 		int direction = 4;// like in CSS: 1 - up, 2 - right, 3 - down, 4 - left;
 		if(Math.abs(dy) > Math.abs(dx) ){
 			if(dy > 0.0) direction = 3;
@@ -54,7 +67,6 @@ public class GameRandom {
 			case 4:
 				return Directions.LEFT;
 		}
-
 		return Directions.INPLACE;
 	}
 }
