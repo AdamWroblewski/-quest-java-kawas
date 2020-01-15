@@ -50,15 +50,15 @@ public class GameMap {
         }
     }
 
-    public void shot(){
+    public void playerFight(){
         Actor actor = player.shoot();
         if(actor == null)
             return;
 
         Skeleton monster = (Skeleton) actor;
-        monster.setStaggerState();
+        monster.setStunnedState();
     }
-    public boolean kill(){
+    public boolean playerFinishesOff(){
         Actor actor = player.gloryKill();
         if(actor == null)
             return false;

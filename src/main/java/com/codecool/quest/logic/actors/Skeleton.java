@@ -1,18 +1,16 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.actors.Actor;
 
 public class Skeleton extends Actor {
-    private boolean staggered;
+    private boolean stunned;
     private int staggerCounter = 0;
     private String stateName = "skeleton";
     private boolean wasRight;
 
     public Skeleton(Cell cell) {
         super(cell);
-        staggered = false;
+        stunned = false;
 
         wasRight = true;
     }
@@ -24,9 +22,9 @@ public class Skeleton extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        if(staggered) {
+        if(stunned) {
             staggerCounter--;
-            if(staggerCounter == 0) unsetStaggerState();
+            if(staggerCounter == 0) unsetStunnedState();
             return;
         }
 
@@ -40,16 +38,16 @@ public class Skeleton extends Actor {
 
     }
 
-    public void setStaggerState(){
-        staggered = true;
+    public void setStunnedState(){
+        stunned = true;
         staggerCounter = 4;
         stateName = "staggerState";
     }
-    public void unsetStaggerState(){
-        staggered = false;
+    public void unsetStunnedState(){
+        stunned = false;
         stateName = "skeleton";
     }
-    public boolean isStaggered(){
-        return staggered;
+    public boolean isStunned(){
+        return stunned;
     }
 }

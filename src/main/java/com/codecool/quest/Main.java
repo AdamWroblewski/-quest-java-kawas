@@ -1,10 +1,8 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.inventory.Button;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -83,11 +81,11 @@ public class Main extends Application {
                 refresh();
                 break;
             case F:
-                map.kill();
+                map.playerFinishesOff();
                 refresh();
                 break;
             case SPACE:
-                map.shot();
+                map.playerFight();
                 refresh();
                 break;
         }
