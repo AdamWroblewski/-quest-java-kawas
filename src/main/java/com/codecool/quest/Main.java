@@ -89,6 +89,14 @@ public class Main extends Application {
                 map.getPlayer().move(++moveX,moveY);
                 refresh();
                 break;
+            case F:
+                map.kill();
+                refresh();
+                break;
+            case SPACE:
+                map.shot();
+                refresh();
+                break;
         }
         if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.STAIRSDOWN)){
             map = MapLoader.loadMap(mapList.remove(0));
