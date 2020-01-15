@@ -26,7 +26,7 @@ public class Main extends Application {
     private final int screenWidth = 25;
     private final int screenHeight = 20;
     List<String> mapList = new ArrayList<>(){{
-        add("/map3.txt");
+//        add("/map3.txt");
         add("/map.txt");
         add("/map2.txt");
     }};
@@ -108,6 +108,8 @@ public class Main extends Application {
     }
 
     private void refresh() {
+        int mapShiftX = map.getPlayer().getX();
+        int mapShiftY = map.getPlayer().getY();
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         map.moveMonsters();
@@ -115,13 +117,13 @@ public class Main extends Application {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y);
+                    Tiles.drawTile(context, cell.getActor(), 10+x-mapShiftX, 10+y-mapShiftY);
                 }
                 else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y);
+                    Tiles.drawTile(context, cell.getItem(), 10+x-mapShiftX, 10+y-mapShiftY);
                 }
                 else {
-                    Tiles.drawTile(context, cell, x, y);
+                    Tiles.drawTile(context, cell, 10+x-mapShiftX, 10+y-mapShiftY);
                 }
             }
         }
