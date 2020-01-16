@@ -6,13 +6,12 @@ import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
 public class Skeleton extends Enemy {
-    private boolean stunned;
     private int staggerCounter = 0;
     private boolean fightOn = false;
 
     public Skeleton(Cell cell) {
         super(cell);
-        stunned = false;
+        stateName = "skeleton";
         health = 50;
 
     }
@@ -38,6 +37,8 @@ public class Skeleton extends Enemy {
         }
 
     }
+
+    @Override
     public void moveToPlayer(Player player, GameRandom gameRandom){
         if(stunned){
             staggerCounter--;
@@ -45,25 +46,7 @@ public class Skeleton extends Enemy {
             return;
         }
 
-        int playerX = player.getX(), playerY = player.getY(),
-                monsterX = this.getX(), monsterY = this.getY();
-
-        Directions pathDirection = gameRandom.randMove(monsterX, monsterY, playerX, playerY);
-
-        switch( pathDirection.getDirection() ){
-            case 1:
-                move(0, -1);
-                break;
-            case 2:
-                move(1, 0);
-                break;
-            case 3:
-                move(0, 1);
-                break;
-            case 4:
-                move(-1, 0);
-                break;
-        }
+        super.moveToPlayer(player, gameRandom);
     }
 
     @Override
@@ -83,8 +66,5 @@ public class Skeleton extends Enemy {
     public void unsetStunnedState(){
         stunned = false;
         stateName = "skeleton";
-    }
-    public boolean isStunned(){
-        return stunned;
     }
 }
