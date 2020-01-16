@@ -60,11 +60,6 @@ public class Skeleton extends Enemy {
     }
 
     @Override
-    public boolean isStunned(){
-        return stunned;
-    }
-
-    @Override
     public boolean setStunnedState(){
         stunned = true;
         staggerCounter = 4;
@@ -74,5 +69,9 @@ public class Skeleton extends Enemy {
     public void unsetStunnedState(){
         stunned = false;
         stateName = "skeleton";
+    }
+    @Override
+    public boolean canBeStunned(){
+        return true;
     }
 }
