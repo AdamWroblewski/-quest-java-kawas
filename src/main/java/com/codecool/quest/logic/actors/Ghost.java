@@ -4,7 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 
 public class Ghost extends Enemy {
-    Ghost(Cell cell){
+    public Ghost(Cell cell){
         super(cell);
         stateName = "ghost1";
         health = 50;
@@ -30,4 +30,15 @@ public class Ghost extends Enemy {
         return false;
     }
 
+    @Override
+    public void setFightOn(){}
+
+    @Override
+    public boolean isStunned(){
+        return true;
+    }
+    @Override
+    public boolean setStunnedState(){
+        return true;
+    }
 }

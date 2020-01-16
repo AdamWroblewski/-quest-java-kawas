@@ -54,14 +54,22 @@ public class Skeleton extends Enemy {
         return false;
     }
 
+    @Override
     public void setFightOn(){
         fightOn = true;
     }
 
-    public void setStunnedState(){
+    @Override
+    public boolean isStunned(){
+        return stunned;
+    }
+
+    @Override
+    public boolean setStunnedState(){
         stunned = true;
         staggerCounter = 4;
         stateName = "staggerState";
+        return false;
     }
     public void unsetStunnedState(){
         stunned = false;
