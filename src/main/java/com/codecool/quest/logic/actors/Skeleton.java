@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
@@ -8,14 +9,13 @@ public class Skeleton extends Actor {
     private boolean stunned;
     private int staggerCounter = 0;
     private String stateName = "skeleton";
-    private boolean wasRight;
+    private boolean fightOn = false;
 
     public Skeleton(Cell cell) {
         super(cell);
         stunned = false;
         health = 50;
 
-        wasRight = true;
     }
 
     @Override
@@ -31,12 +31,11 @@ public class Skeleton extends Actor {
             return;
         }
 
-        if(wasRight) {
-            super.move(1, 0);
-            wasRight = false;
-        } else {
-            super.move(-1, 0);
-            wasRight = true;
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
         }
 
     }
@@ -54,18 +53,27 @@ public class Skeleton extends Actor {
 
         switch( pathDirection.getDirection() ){
             case 1:
-                super.move(0, -1);
+                move(0, -1);
                 break;
             case 2:
-                super.move(1, 0);
+                move(1, 0);
                 break;
             case 3:
-                super.move(0, 1);
+                move(0, 1);
                 break;
             case 4:
-                super.move(-1, 0);
+                move(-1, 0);
                 break;
         }
+    }
+
+    @Override
+    public boolean isPlayer(){
+        return false;
+    }
+
+    public void setFightOn(){
+        fightOn = true;
     }
 
     public void setStunnedState(){
