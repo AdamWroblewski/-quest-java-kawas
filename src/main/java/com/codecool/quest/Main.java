@@ -22,6 +22,10 @@ import java.util.List;
 
 
 public class Main extends Application {
+    private int distanceFromLeftBorder;
+    private int distanceFromTopBorder;
+    private int xAxisMiddle;
+    private int yAxisMiddle;
 
     private final int screenWidth = 25;
     private final int screenHeight = 20;
@@ -103,42 +107,63 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        int distanceFromLeftBorderHorizontaly = 0;
-        int distanceFromTopBorderVertically = 0;
-        int xAxisMiddle = 0;
-        int yAxisMiddle = 0;
+        distanceFromLeftBorder = 0;
+        distanceFromTopBorder = 0;
+        xAxisMiddle = 0;
+        yAxisMiddle = 0;
 
-        if (map.getWidth() > screenWidth || map.getHeight() > screenHeight) {
-            /* set variables helping to keep focus on character only on maps bigger than scren width/height
-            helper for lose focus from character horizontally/vertically */
-            distanceFromLeftBorderHorizontaly = map.getPlayer().getX();
-            distanceFromTopBorderVertically = map.getPlayer().getY();
-
-            // 1/2 of screen width/height to keep focus on character
-            xAxisMiddle = screenWidth / 2;
-            yAxisMiddle = screenHeight / 2;
+        if (mapIsBiggerThanScreen()) {
+            setNewPositionVariables();
         }
 
+        printNewBoard();
+    }
+
+    private void setNewPositionVariables() {
+        distanceFromLeftBorder = map.getPlayer().getX();
+        distanceFromTopBorder = map.getPlayer().getY();
+
+        xAxisMiddle = screenWidth / 2;
+        yAxisMiddle = screenHeight / 2;
+
+        if (playerIsNearLeftBorder()) {
+            xAxisMiddle = distanceFromLeftBorder;
+        } else if (playerIsNearRightBorder()) {
+            xAxisMiddle += 1 + xAxisMiddle - (distanceFromLeftBorder - map.getWidth()) * -1;
+        }
+        if (playerIsNearTopBorder()) {
+            yAxisMiddle = distanceFromTopBorder;
+        } else if (playerIsNearBottomBorder()) {
+            distanceFromTopBorder = map.getHeight() - yAxisMiddle;
+        }
+    }
+
+    private boolean playerIsNearBottomBorder() {
+        return map.getHeight() - map.getPlayer().getY() <= yAxisMiddle;
+    }
+
+    private boolean playerIsNearTopBorder() {
+        return map.getPlayer().getY() < yAxisMiddle;
+    }
+
+    private boolean playerIsNearRightBorder() {
+        return (map.getPlayer().getX() - map.getWidth()) * -1 <= xAxisMiddle;
+    }
+
+    private boolean playerIsNearLeftBorder() {
+        return map.getPlayer().getX() < xAxisMiddle;
+    }
+
+    private void printNewBoard() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         map.moveMonsters();
-        if (map.getPlayer().getX() < xAxisMiddle) {
-            xAxisMiddle = distanceFromLeftBorderHorizontaly;
-        } else if ((map.getPlayer().getX() - map.getWidth()) * -1 <= xAxisMiddle) {
-            xAxisMiddle += 1 + xAxisMiddle - (distanceFromLeftBorderHorizontaly - map.getWidth()) * -1;
-            System.out.println("x axis: " + xAxisMiddle);
-        }
-        if (map.getPlayer().getY() < yAxisMiddle) {
-            yAxisMiddle = distanceFromTopBorderVertically;
-        } else if (map.getHeight() - map.getPlayer().getY() <= yAxisMiddle) {
-            distanceFromTopBorderVertically = map.getHeight() - yAxisMiddle;
-        }
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
 
-                int includedCellX = x + xAxisMiddle - distanceFromLeftBorderHorizontaly;
-                int includedCellY = y + yAxisMiddle - distanceFromTopBorderVertically;
+                int includedCellX = x + xAxisMiddle - distanceFromLeftBorder;
+                int includedCellY = y + yAxisMiddle - distanceFromTopBorder;
 
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), includedCellX, includedCellY);
@@ -149,9 +174,10 @@ public class Main extends Application {
                 }
             }
         }
-        System.out.println(xAxisMiddle);
-        System.out.println(yAxisMiddle);
-
         healthLabel.setText("" + map.getPlayer().getHealth());
+    }
+
+    private boolean mapIsBiggerThanScreen() {
+        return map.getWidth() > screenWidth || map.getHeight() > screenHeight;
     }
 }
