@@ -41,6 +41,7 @@ public class Tiles {
         tileMap.put("button", new Tile(28, 20));
         tileMap.put("stairs down", new Tile(21, 0));
         tileMap.put("ladder", new Tile(21, 1));
+        tileMap.put("tree", new Tile(0, 1));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

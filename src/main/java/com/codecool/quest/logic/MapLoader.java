@@ -67,6 +67,9 @@ public class MapLoader {
                         case 'l':
                             cell.setType(CellType.LADDER);
                             break;
+                        case 't':
+                            cell.setType(CellType.TREE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

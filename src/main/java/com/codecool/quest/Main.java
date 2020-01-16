@@ -34,10 +34,10 @@ public class Main extends Application {
     private final int screenWidth = 25;
     private final int screenHeight = 20;
     List<String> mapList = new ArrayList<>(){{
-        add("/map.txt");
         add("/map3.txt");
-//        add("/map4.txt");
+        add("/map.txt");
         add("/map2.txt");
+        add("/map3.txt");
     }};
     GameMap map = MapLoader.loadMap(mapList.remove(0));
     Canvas canvas = new Canvas(
