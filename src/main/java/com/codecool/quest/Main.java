@@ -26,15 +26,23 @@ import java.util.List;
 
 
 public class Main extends Application {
+    private int distanceFromLeftBorder;
+    private int distanceFromTopBorder;
+    private int xAxisMiddle;
+    private int yAxisMiddle;
 
+    private final int screenWidth = 25;
+    private final int screenHeight = 20;
     List<String> mapList = new ArrayList<>(){{
         add("/map.txt");
+        add("/map3.txt");
+//        add("/map4.txt");
         add("/map2.txt");
     }};
     GameMap map = MapLoader.loadMap(mapList.remove(0));
     Canvas canvas = new Canvas(
-            map.getWidth() * Tiles.TILE_WIDTH,
-            map.getHeight() * Tiles.TILE_WIDTH);
+            screenWidth * Tiles.TILE_WIDTH,
+            screenHeight * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label inventory = new Label();
@@ -89,53 +97,107 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(moveX, --moveY);
-                refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(moveX, ++moveY);
-                refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(--moveX, moveY);
-                refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(++moveX,moveY);
-                refresh();
+                map.getPlayer().move(++moveX, moveY);
                 break;
             case F:
                 map.playerFinishesOff();
-                refresh();
                 break;
             case SPACE:
                 map.playerFight();
-                refresh();
                 break;
         }
-        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.STAIRSDOWN)){
+        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.STAIRSDOWN)) {
             map = MapLoader.loadMap(mapList.remove(0));
-            refresh();
         }
+        refresh();
         keyEvent.consume();
     }
 
     private void refresh() {
+
+        setDefaultPositionVariables();
+
+        if (mapIsBiggerThanScreen()) {
+            setNewPositionVariables();
+        }
+
+        printNewBoard();
+    }
+
+    private void setDefaultPositionVariables() {
+        distanceFromLeftBorder = 0;
+        distanceFromTopBorder = 0;
+        xAxisMiddle = 0;
+        yAxisMiddle = 0;
+    }
+
+    private void setNewPositionVariables() {
+        distanceFromLeftBorder = map.getPlayer().getX();
+        distanceFromTopBorder = map.getPlayer().getY();
+
+        xAxisMiddle = screenWidth / 2;
+        yAxisMiddle = screenHeight / 2;
+
+        if (playerIsNearLeftBorder()) {
+            xAxisMiddle = distanceFromLeftBorder;
+        } else if (playerIsNearRightBorder()) {
+            xAxisMiddle += 1 + xAxisMiddle - (distanceFromLeftBorder - map.getWidth()) * -1;
+        }
+        if (playerIsNearTopBorder()) {
+            yAxisMiddle = distanceFromTopBorder;
+        } else if (playerIsNearBottomBorder()) {
+            distanceFromTopBorder = map.getHeight() - yAxisMiddle;
+        }
+    }
+
+    private boolean playerIsNearBottomBorder() {
+        return map.getHeight() - map.getPlayer().getY() <= yAxisMiddle;
+    }
+
+    private boolean playerIsNearTopBorder() {
+        return map.getPlayer().getY() < yAxisMiddle;
+    }
+
+    private boolean playerIsNearRightBorder() {
+        return (map.getPlayer().getX() - map.getWidth()) * -1 <= xAxisMiddle;
+    }
+
+    private boolean playerIsNearLeftBorder() {
+        return map.getPlayer().getX() < xAxisMiddle;
+    }
+
+    private void printNewBoard() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         map.moveMonsters();
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
+
+                int includedCellX = x + xAxisMiddle - distanceFromLeftBorder;
+                int includedCellY = y + yAxisMiddle - distanceFromTopBorder;
+
                 if (cell.getActor() != null) {
-                    Tiles.drawTile(context, cell.getActor(), x, y);
-                }
-                else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y);
+                    Tiles.drawTile(context, cell.getActor(), includedCellX, includedCellY);
+                } else if (cell.getItem() != null) {
+                    Tiles.drawTile(context, cell.getItem(), includedCellX, includedCellY);
                 } else {
-                    Tiles.drawTile(context, cell, x, y);
+                    Tiles.drawTile(context, cell, includedCellX, includedCellY);
                 }
             }
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+    }
+
+    private boolean mapIsBiggerThanScreen() {
+        return map.getWidth() > screenWidth || map.getHeight() > screenHeight;
     }
 }

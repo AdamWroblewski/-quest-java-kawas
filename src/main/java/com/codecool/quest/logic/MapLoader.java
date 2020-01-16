@@ -1,5 +1,6 @@
 package com.codecool.quest.logic;
 
+import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.inventory.Shield;
@@ -43,6 +44,10 @@ public class MapLoader {
                         case 's':
                             cell.setType(CellType.FLOOR);
                             map.addMonster(new Skeleton(cell) );
+                            break;
+                        case 'g':
+                            cell.setType(CellType.FLOOR);
+                            map.addMonster(new Ghost(cell) );
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

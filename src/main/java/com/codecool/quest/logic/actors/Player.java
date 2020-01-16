@@ -9,12 +9,30 @@ import javafx.collections.ObservableList;
 
 public class Player extends Actor {
 
+    private Directions direction = Directions.INPLACE;
     public Player(Cell cell) {
         super(cell);
     }
 
     public String getTileName() {
         return "player";
+    }
+
+    @Override
+    public void move(int dx, int dy){
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        Actor actor = nextCell.getActor();
+        if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR)) {
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+        } else if(actor != null && !actor.isPlayer() ){
+            Enemy monster = (Enemy) actor;
+            monster.setFightOn();
+        } else if (nextCell.getType().equals(CellType.CLOSEDDOOR)){
+            nextCell.setType(CellType.OPENEDDOOR);
+        }
+        direction.setDirection(dx, dy);
     }
 
     public Actor shoot(){
@@ -30,13 +48,18 @@ public class Player extends Actor {
             return null;
 
         Actor actor = cellCheck.getActor();
-        Skeleton monster = (Skeleton) actor;
+        Enemy monster = (Enemy) actor;
         if(monster != null && monster.isStunned() ){
             cellCheck.setActor(null);
             return actor;
         }
 
         return null;
+    }
+
+    @Override
+    public boolean isPlayer() {
+        return true;
     }
 
     private Cell cellByDirection(){

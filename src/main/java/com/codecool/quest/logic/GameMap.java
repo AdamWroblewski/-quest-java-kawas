@@ -1,6 +1,7 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Enemy;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 
@@ -15,7 +16,7 @@ public class GameMap {
     GameRandom gameRandom = new GameRandom();
 
     private Player player;
-    private List<Skeleton> monsters;
+    private List<Enemy> monsters;
 
     public GameMap(int width, int height, CellType defaultCellType) {
         this.width = width;
@@ -41,12 +42,12 @@ public class GameMap {
         return player;
     }
 
-    public void addMonster(Skeleton monster){
+    public void addMonster(Enemy monster){
         monsters.add(monster);
     }
 
     public void moveMonsters(){
-        ListIterator<Skeleton> iter = monsters.listIterator();
+        ListIterator<Enemy> iter = monsters.listIterator();
         while(iter.hasNext() ){
             iter.next().moveToPlayer(player, gameRandom);
         }
@@ -57,15 +58,17 @@ public class GameMap {
         if(actor == null)
             return;
 
-        Skeleton monster = (Skeleton) actor;
-        monster.setStunnedState();
+        Enemy monster = (Enemy) actor;
+        boolean isKilled = monster.setStunnedState();
+        if(isKilled)
+            monsters.remove(monster);
     }
     public boolean playerFinishesOff(){
         Actor actor = player.gloryKill();
         if(actor == null)
             return false;
 
-        Skeleton monster = (Skeleton) actor;
+        Enemy monster = (Enemy) actor;
         monsters.remove(monster);
         return true;
     }
