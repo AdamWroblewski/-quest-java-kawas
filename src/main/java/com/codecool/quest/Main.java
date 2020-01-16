@@ -26,9 +26,9 @@ public class Main extends Application {
     private final int screenWidth = 25;
     private final int screenHeight = 20;
     List<String> mapList = new ArrayList<>(){{
+        add("/map.txt");
+        add("/map3.txt");
 //        add("/map4.txt");
-//        add("/map3.txt");
-//        add("/map.txt");
         add("/map2.txt");
     }};
     GameMap map = MapLoader.loadMap(mapList.remove(0));
@@ -79,33 +79,27 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(moveX, --moveY);
-                refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(moveX, ++moveY);
-                refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(--moveX, moveY);
-                refresh();
                 break;
             case RIGHT:
-                map.getPlayer().move(++moveX,moveY);
-                refresh();
+                map.getPlayer().move(++moveX, moveY);
                 break;
             case F:
                 map.playerFinishesOff();
-                refresh();
                 break;
             case SPACE:
                 map.playerFight();
-                refresh();
                 break;
         }
-        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.STAIRSDOWN)){
+        if (cell.getNeighbor(moveX, moveY).getType().equals(CellType.STAIRSDOWN)) {
             map = MapLoader.loadMap(mapList.remove(0));
-            refresh();
         }
+        refresh();
     }
 
     private void refresh() {
