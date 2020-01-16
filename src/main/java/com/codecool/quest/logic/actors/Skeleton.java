@@ -5,10 +5,9 @@ import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
-public class Skeleton extends Actor {
+public class Skeleton extends Enemy {
     private boolean stunned;
     private int staggerCounter = 0;
-    private String stateName = "skeleton";
     private boolean fightOn = false;
 
     public Skeleton(Cell cell) {
