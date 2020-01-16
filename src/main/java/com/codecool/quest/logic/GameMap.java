@@ -12,6 +12,7 @@ public class GameMap {
     private int width;
     private int height;
     private Cell[][] cells;
+    GameRandom gameRandom = new GameRandom();
 
     private Player player;
     private List<Skeleton> monsters;
@@ -46,19 +47,19 @@ public class GameMap {
     public void moveMonsters(){
         ListIterator<Skeleton> iter = monsters.listIterator();
         while(iter.hasNext() ){
-            iter.next().move(1, 1);
+            iter.next().moveToPlayer(player, gameRandom);
         }
     }
 
-    public void shot(){
+    public void playerFight(){
         Actor actor = player.shoot();
         if(actor == null)
             return;
 
         Skeleton monster = (Skeleton) actor;
-        monster.setStaggerState();
+        monster.setStunnedState();
     }
-    public boolean kill(){
+    public boolean playerFinishesOff(){
         Actor actor = player.gloryKill();
         if(actor == null)
             return false;

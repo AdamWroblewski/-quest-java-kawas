@@ -1,18 +1,19 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.Directions;
+import com.codecool.quest.logic.GameRandom;
 
 public class Skeleton extends Actor {
-    private boolean staggered;
+    private boolean stunned;
     private int staggerCounter = 0;
     private String stateName = "skeleton";
     private boolean wasRight;
 
     public Skeleton(Cell cell) {
         super(cell);
-        staggered = false;
+        stunned = false;
+        health = 50;
 
         wasRight = true;
     }
@@ -24,9 +25,9 @@ public class Skeleton extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        if(staggered) {
+        if(stunned) {
             staggerCounter--;
-            if(staggerCounter == 0) unsetStaggerState();
+            if(staggerCounter == 0) unsetStunnedState();
             return;
         }
 
@@ -39,17 +40,44 @@ public class Skeleton extends Actor {
         }
 
     }
+    public void moveToPlayer(Player player, GameRandom gameRandom){
+        if(stunned){
+            staggerCounter--;
+            if(staggerCounter == 0) unsetStunnedState();
+            return;
+        }
 
-    public void setStaggerState(){
-        staggered = true;
+        int playerX = player.getX(), playerY = player.getY(),
+                monsterX = this.getX(), monsterY = this.getY();
+
+        Directions pathDirection = gameRandom.randMove(monsterX, monsterY, playerX, playerY);
+
+        switch( pathDirection.getDirection() ){
+            case 1:
+                super.move(0, -1);
+                break;
+            case 2:
+                super.move(1, 0);
+                break;
+            case 3:
+                super.move(0, 1);
+                break;
+            case 4:
+                super.move(-1, 0);
+                break;
+        }
+    }
+
+    public void setStunnedState(){
+        stunned = true;
         staggerCounter = 4;
         stateName = "staggerState";
     }
-    public void unsetStaggerState(){
-        staggered = false;
+    public void unsetStunnedState(){
+        stunned = false;
         stateName = "skeleton";
     }
-    public boolean isStaggered(){
-        return staggered;
+    public boolean isStunned(){
+        return stunned;
     }
 }

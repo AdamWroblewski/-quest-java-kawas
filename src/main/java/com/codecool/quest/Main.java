@@ -90,11 +90,11 @@ public class Main extends Application {
                 refresh();
                 break;
             case F:
-                map.kill();
+                map.playerFinishesOff();
                 refresh();
                 break;
             case SPACE:
-                map.shot();
+                map.playerFight();
                 refresh();
                 break;
         }
@@ -116,8 +116,8 @@ public class Main extends Application {
                 }
                 else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                }
-                else {
+                } else {
+
                     Tiles.drawTile(context, cell, x, y);
                 }
             }
