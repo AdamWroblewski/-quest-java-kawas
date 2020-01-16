@@ -10,14 +10,12 @@ public class Skeleton extends Actor {
     private int staggerCounter = 0;
     private String stateName = "skeleton";
     private boolean fightOn = false;
-    private boolean wasRight;
 
     public Skeleton(Cell cell) {
         super(cell);
         stunned = false;
         health = 50;
 
-        wasRight = true;
     }
 
     @Override
@@ -27,11 +25,6 @@ public class Skeleton extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        if(fightOn){
-            fightOn = false;
-            return;
-        }
-
         if(stunned) {
             staggerCounter--;
             if(staggerCounter == 0) unsetStunnedState();
@@ -44,7 +37,7 @@ public class Skeleton extends Actor {
             nextCell.setActor(this);
             cell = nextCell;
         }
-        direction.setDirection(dx, dy);
+
     }
     public void moveToPlayer(Player player, GameRandom gameRandom){
         if(stunned){
