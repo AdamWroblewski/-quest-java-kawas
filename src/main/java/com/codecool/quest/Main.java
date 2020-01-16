@@ -107,16 +107,21 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        distanceFromLeftBorder = 0;
-        distanceFromTopBorder = 0;
-        xAxisMiddle = 0;
-        yAxisMiddle = 0;
+
+        setDefaultPositionVariables();
 
         if (mapIsBiggerThanScreen()) {
             setNewPositionVariables();
         }
 
         printNewBoard();
+    }
+
+    private void setDefaultPositionVariables() {
+        distanceFromLeftBorder = 0;
+        distanceFromTopBorder = 0;
+        xAxisMiddle = 0;
+        yAxisMiddle = 0;
     }
 
     private void setNewPositionVariables() {
