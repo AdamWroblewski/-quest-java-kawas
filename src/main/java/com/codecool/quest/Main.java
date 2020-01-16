@@ -5,11 +5,15 @@ import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -33,6 +37,12 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label inventory = new Label();
+    Button buttonBar = new Button("Pick Up");
+//
+    public static ObservableList<String> items = FXCollections.observableArrayList("gold", "sword", "shield");
+    ListView<String> listView = new ListView<String>(items);
+
 
     public static void main(String[] args) {
         launch(args);
@@ -46,6 +56,9 @@ public class Main extends Application {
 
         ui.add(new Label("Health: "), 0, 0);
         ui.add(healthLabel, 1, 0);
+        ui.add(new Label("Inventory: "), 0, 5);
+        ui.add(listView, 0, 10);
+        ui.add(buttonBar, 0, 15);
 
         BorderPane borderPane = new BorderPane();
 
@@ -55,17 +68,18 @@ public class Main extends Application {
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         refresh();
-        scene.setOnKeyPressed(this::onKeyPressed);
-        scene.setOnMouseClicked(this::mouseEvent);
+
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, this::onKeyPressed);
+        buttonBar.addEventHandler(MouseEvent.MOUSE_CLICKED, this::mouseEvent);
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
-        System.out.println("Hello");
-//        System.out.println(cell.getTileName());
-//        if (cell.getType() == )
+
+        map.getPlayer().pickUpItem();
+        refresh();
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
@@ -102,6 +116,7 @@ public class Main extends Application {
             map = MapLoader.loadMap(mapList.remove(0));
             refresh();
         }
+        keyEvent.consume();
     }
 
     private void refresh() {
@@ -117,7 +132,6 @@ public class Main extends Application {
                 else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
-
                     Tiles.drawTile(context, cell, x, y);
                 }
             }

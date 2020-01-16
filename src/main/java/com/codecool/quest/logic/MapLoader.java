@@ -2,7 +2,6 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.inventory.Button;
 import com.codecool.quest.logic.inventory.Shield;
 import com.codecool.quest.logic.inventory.Keys;
 
@@ -56,10 +55,6 @@ public class MapLoader {
                         case 'k':
                             cell.setType(CellType.FLOOR);
                             new Keys(cell);
-                            break;
-                        case '^':
-                            cell.setType(CellType.EMPTY);
-                            new Button(cell);
                             break;
                         case 'f':
                             cell.setType(CellType.STAIRSDOWN);

@@ -44,6 +44,7 @@ public class GameMap {
     public void addMonster(Skeleton monster){
         monsters.add(monster);
     }
+
     public void moveMonsters(){
         ListIterator<Skeleton> iter = monsters.listIterator();
         while(iter.hasNext() ){

@@ -1,10 +1,14 @@
 package com.codecool.quest.logic.actors;
 
+import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
+import javafx.collections.ObservableList;
 
 
 public class Player extends Actor {
+
     public Player(Cell cell) {
         super(cell);
     }
@@ -56,6 +60,16 @@ public class Player extends Actor {
         }
 
         return cellCheck;
+    }
+
+    public void pickUpItem(){
+        try{
+            if(cell.getItem().getTileName() != null){
+                Main.items.add(cell.getItem().getTileName());
+                cell.setItem(null);
+            }
+        }catch(NullPointerException ignored){
+        }
     }
 
 }
