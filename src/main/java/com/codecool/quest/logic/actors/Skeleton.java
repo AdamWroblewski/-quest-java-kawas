@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
@@ -8,6 +9,7 @@ public class Skeleton extends Actor {
     private boolean stunned;
     private int staggerCounter = 0;
     private String stateName = "skeleton";
+    private boolean fightOn = false;
     private boolean wasRight;
 
     public Skeleton(Cell cell) {
@@ -25,20 +27,24 @@ public class Skeleton extends Actor {
 
     @Override
     public void move(int dx, int dy) {
+        if(fightOn){
+            fightOn = false;
+            return;
+        }
+
         if(stunned) {
             staggerCounter--;
             if(staggerCounter == 0) unsetStunnedState();
             return;
         }
 
-        if(wasRight) {
-            super.move(1, 0);
-            wasRight = false;
-        } else {
-            super.move(-1, 0);
-            wasRight = true;
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
         }
-
+        direction.setDirection(dx, dy);
     }
     public void moveToPlayer(Player player, GameRandom gameRandom){
         if(stunned){
@@ -54,18 +60,27 @@ public class Skeleton extends Actor {
 
         switch( pathDirection.getDirection() ){
             case 1:
-                super.move(0, -1);
+                move(0, -1);
                 break;
             case 2:
-                super.move(1, 0);
+                move(1, 0);
                 break;
             case 3:
-                super.move(0, 1);
+                move(0, 1);
                 break;
             case 4:
-                super.move(-1, 0);
+                move(-1, 0);
                 break;
         }
+    }
+
+    @Override
+    public boolean isPlayer(){
+        return false;
+    }
+
+    public void setFightOn(){
+        fightOn = true;
     }
 
     public void setStunnedState(){

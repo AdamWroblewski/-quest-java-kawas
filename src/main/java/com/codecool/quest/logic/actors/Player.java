@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 
 
@@ -11,6 +12,19 @@ public class Player extends Actor {
 
     public String getTileName() {
         return "player";
+    }
+
+    @Override
+    public void move(int dx, int dy){
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+        } else if (nextCell.getType().equals(CellType.CLOSEDDOOR)){
+            nextCell.setType(CellType.OPENEDDOOR);
+        }
+        direction.setDirection(dx, dy);
     }
 
     public Actor shoot(){
@@ -33,6 +47,11 @@ public class Player extends Actor {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean isPlayer() {
+        return true;
     }
 
     private Cell cellByDirection(){
