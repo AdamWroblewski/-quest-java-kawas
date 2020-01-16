@@ -42,5 +42,8 @@ public abstract class Enemy extends Actor {
     public abstract void setFightOn();
     public abstract boolean setStunnedState();
 
-    public abstract boolean isStunned();
+    public boolean isStunned(){
+        return stunned;
+    }
+    public abstract boolean canBeStunned();
 }

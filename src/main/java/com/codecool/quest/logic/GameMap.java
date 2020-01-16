@@ -54,21 +54,19 @@ public class GameMap {
     }
 
     public void playerFight(){
-        Actor actor = player.shoot();
-        if(actor == null)
+        Enemy monster = player.shoot();
+        if(monster == null)
             return;
 
-        Enemy monster = (Enemy) actor;
         boolean isKilled = monster.setStunnedState();
         if(isKilled)
             monsters.remove(monster);
     }
     public boolean playerFinishesOff(){
-        Actor actor = player.gloryKill();
-        if(actor == null)
+        Enemy monster = (Enemy) player.gloryKill();
+        if(monster == null)
             return false;
 
-        Enemy monster = (Enemy) actor;
         monsters.remove(monster);
         return true;
     }

@@ -35,23 +35,26 @@ public class Player extends Actor {
         direction.setDirection(dx, dy);
     }
 
-    public Actor shoot(){
+    public Enemy shoot(){
         Cell cellCheck = cellByDirection();
         if(cellCheck == null)
             return null;
 
-        return cellCheck.getActor();
+        Enemy monster = (Enemy) cellCheck.getActor();
+        if(monster != null && !monster.canBeStunned() )
+            cellCheck.setActor(null);
+
+        return monster;
     }
     public Actor gloryKill(){
         Cell cellCheck = cellByDirection();
         if(cellCheck == null)
             return null;
 
-        Actor actor = cellCheck.getActor();
-        Enemy monster = (Enemy) actor;
-        if(monster != null && monster.isStunned() ){
+        Enemy monster = (Enemy) cellCheck.getActor();
+        if(monster != null && monster.canBeStunned() && monster.isStunned() ){
             cellCheck.setActor(null);
-            return actor;
+            return monster;
         }
 
         return null;

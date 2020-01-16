@@ -8,6 +8,7 @@ public class Ghost extends Enemy {
         super(cell);
         stateName = "ghost1";
         health = 50;
+        stunned = true;
     }
 
     @Override
@@ -34,11 +35,11 @@ public class Ghost extends Enemy {
     public void setFightOn(){}
 
     @Override
-    public boolean isStunned(){
+    public boolean setStunnedState(){
         return true;
     }
     @Override
-    public boolean setStunnedState(){
-        return true;
+    public boolean canBeStunned(){
+        return false;
     }
 }
