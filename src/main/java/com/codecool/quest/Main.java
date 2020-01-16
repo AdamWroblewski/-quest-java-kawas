@@ -94,11 +94,11 @@ public class Main extends Application {
                 refresh();
                 break;
             case F:
-                map.kill();
+                map.playerFinishesOff();
                 refresh();
                 break;
             case SPACE:
-                map.shot();
+                map.playerFight();
                 refresh();
                 break;
         }
@@ -109,51 +109,43 @@ public class Main extends Application {
     }
 
     private void refresh() {
-        int distanceFromBorderHorizontaly = 0;
-        int distanceFromBorderVertically = 0;
+        int distanceFromLeftBorderHorizontaly = 0;
+        int distanceFromTopBorderVertically = 0;
         int xAxisMiddle = 0;
         int yAxisMiddle = 0;
 
         if (map.getWidth() > screenWidth || map.getHeight() > screenHeight) {
             /* set variables helping to keep focus on character only on maps bigger than scren width/height
             helper for lose focus from character horizontally/vertically */
-            distanceFromBorderHorizontaly = map.getPlayer().getX();
-            distanceFromBorderVertically = map.getPlayer().getY();
+            distanceFromLeftBorderHorizontaly = map.getPlayer().getX();
+            distanceFromTopBorderVertically = map.getPlayer().getY();
 
             // 1/2 of screen width/height to keep focus on character
             xAxisMiddle = screenWidth / 2;
             yAxisMiddle = screenHeight / 2;
         }
-//        System.out.println("distanceFromBorderHorizontaly : " + distanceFromBorderHorizontaly);
-//        System.out.println("distanceFromBorderVertically : " + distanceFromBorderVertically);
-//        System.out.println("xAxisMiddle : " + xAxisMiddle);
-//        System.out.println("yAxisMiddle : " + yAxisMiddle);
 
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         map.moveMonsters();
         if (map.getPlayer().getX() < xAxisMiddle) {
-            System.out.println("AAA");
-            xAxisMiddle = distanceFromBorderHorizontaly;
-        } else if (map.getWidth() - map.getPlayer().getX() <= xAxisMiddle) {
-            xAxisMiddle = map.getPlayer().getX() - screenWidth;
+            xAxisMiddle = distanceFromLeftBorderHorizontaly;
+        } else if ((map.getPlayer().getX() - map.getWidth()) * -1 <= xAxisMiddle) {
+            xAxisMiddle += 1 + xAxisMiddle - (distanceFromLeftBorderHorizontaly - map.getWidth()) * -1;
+            System.out.println("x axis: " + xAxisMiddle);
         }
         if (map.getPlayer().getY() < yAxisMiddle) {
-            yAxisMiddle = distanceFromBorderVertically;
+            yAxisMiddle = distanceFromTopBorderVertically;
         } else if (map.getHeight() - map.getPlayer().getY() <= yAxisMiddle) {
-            distanceFromBorderVertically = map.getHeight() - yAxisMiddle;
+            distanceFromTopBorderVertically = map.getHeight() - yAxisMiddle;
         }
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
 
-                int includedCellX = x + xAxisMiddle - distanceFromBorderHorizontaly;
-                int includedCellY = y + yAxisMiddle - distanceFromBorderVertically;
-                if (x == 0) {
-                    System.out.println("map.getWidth(): " + map.getWidth());
-                    System.out.println("map.getPlayer().getX(): " + map.getPlayer().getX());
-                }
-                    System.out.println("included: " + includedCellX);
+                int includedCellX = x + xAxisMiddle - distanceFromLeftBorderHorizontaly;
+                int includedCellY = y + yAxisMiddle - distanceFromTopBorderVertically;
+
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), includedCellX, includedCellY);
                 } else if (cell.getItem() != null) {
@@ -163,6 +155,8 @@ public class Main extends Application {
                 }
             }
         }
+        System.out.println(xAxisMiddle);
+        System.out.println(yAxisMiddle);
 
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
