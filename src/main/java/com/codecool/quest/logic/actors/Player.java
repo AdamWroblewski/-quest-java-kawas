@@ -24,7 +24,7 @@ public class Player extends Actor {
             nextCell.setActor(this);
             cell = nextCell;
         } else if(actor != null && !actor.isPlayer() ){
-            Skeleton monster = (Skeleton) actor;
+            Enemy monster = (Enemy) actor;
             monster.setFightOn();
         } else if (nextCell.getType().equals(CellType.CLOSEDDOOR)){
             nextCell.setType(CellType.OPENEDDOOR);
@@ -45,7 +45,7 @@ public class Player extends Actor {
             return null;
 
         Actor actor = cellCheck.getActor();
-        Skeleton monster = (Skeleton) actor;
+        Enemy monster = (Enemy) actor;
         if(monster != null && monster.isStunned() ){
             cellCheck.setActor(null);
             return actor;
