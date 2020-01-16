@@ -46,8 +46,8 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventory = new Label();
     Button buttonBar = new Button("Pick Up");
-//
-    public static ObservableList<String> items = FXCollections.observableArrayList("gold", "sword", "shield");
+
+    public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
 
 
@@ -199,4 +199,5 @@ public class Main extends Application {
     private boolean mapIsBiggerThanScreen() {
         return map.getWidth() > screenWidth || map.getHeight() > screenHeight;
     }
+
 }
