@@ -27,7 +27,7 @@ public class Player extends Actor {
 
         Actor actor = cellCheck.getActor();
         Skeleton monster = (Skeleton) actor;
-        if(monster != null && monster.isStaggered() ){
+        if(monster != null && monster.isStunned() ){
             cellCheck.setActor(null);
             return actor;
         }
