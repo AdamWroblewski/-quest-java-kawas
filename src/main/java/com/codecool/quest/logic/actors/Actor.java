@@ -9,6 +9,8 @@ public abstract class Actor implements Drawable {
 
     protected Cell cell;
     protected int health = 100;
+    protected int shield = 0;
+    protected int attackPower = 20;
 
     public Actor(Cell cell) {
         this.cell = cell;
