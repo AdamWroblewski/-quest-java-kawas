@@ -98,7 +98,8 @@ public class Player extends Actor {
                 Main.items.add(cell.getItem().getTileName());
                 cell.setItem(null);
             }
-        }catch(NullPointerException ignored){
+        }catch(NullPointerException e){
+            System.out.println(e + " caused by pickUpItem method when no item is on current cell");
         }
     }
 
