@@ -47,15 +47,14 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventory = new Label();
     Button buttonBar = new Button("Pick Up");
-//
-    public static ObservableList<String> items = FXCollections.observableArrayList("gold", "sword", "shield");
+    //
+    public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
-    int i;
+
     Task<Void> task = new Task<Void>() {
         @Override
         protected Void call() throws Exception {
             while (true) {
-                System.out.println(i++);
                 refresh();
                 Thread.sleep(1000);
                 if (isCancelled()) {
