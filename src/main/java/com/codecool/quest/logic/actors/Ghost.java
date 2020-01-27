@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.GameRandom;
 
 public class Ghost extends Enemy {
     public Ghost(Cell cell){
@@ -19,6 +20,10 @@ public class Ghost extends Enemy {
             stateName = "ghost2";
         else
             stateName = "ghost1";
+    }
+    @Override
+    public void moveToPlayer(Player player, GameRandom gameRandom){
+
     }
 
     @Override

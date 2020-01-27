@@ -13,6 +13,7 @@ public abstract class Enemy extends Actor {
     Enemy(Cell cell){
         super(cell);
         stunned = false;
+        attackPower = 10;
     }
 
     public String getTileName(){
@@ -30,8 +31,14 @@ public abstract class Enemy extends Actor {
     public void moveToPlayer(Player player, GameRandom gameRandom){
         int playerX = player.getX(), playerY = player.getY(),
                 monsterX = this.getX(), monsterY = this.getY();
+        int playerToMonsterDx, playerToMonsterDy;
+        playerToMonsterDx = player.getX() - this.getX();
+        playerToMonsterDy = player.getY() - this.getY();
 
-        Directions pathDirection = gameRandom.randMove(monsterX, monsterY, playerX, playerY);
+        double distanceToPlayer;
+        distanceToPlayer = Math.sqrt(playerToMonsterDx*playerToMonsterDx + playerToMonsterDy*playerToMonsterDy);
+
+        Directions pathDirection = gameRandom.randMove(playerToMonsterDx, playerToMonsterDy, distanceToPlayer);
 
         int dx = 0, dy = 0;
         switch( pathDirection.getDirection() ){
