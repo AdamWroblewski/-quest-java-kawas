@@ -29,13 +29,7 @@ public class Skeleton extends Enemy {
             return;
         }
 
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        }
-
+        super.move(dx, dy);
     }
 
     @Override

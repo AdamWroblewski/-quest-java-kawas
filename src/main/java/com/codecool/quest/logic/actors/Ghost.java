@@ -13,12 +13,7 @@ public class Ghost extends Enemy {
 
     @Override
     public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        }
+        super.move(dx, dy);
 
         if(stateName.equals("ghost1") )
             stateName = "ghost2";
