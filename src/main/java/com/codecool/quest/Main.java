@@ -7,6 +7,7 @@ import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -50,6 +51,24 @@ public class Main extends Application {
     public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
 
+    Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            try {
+                while(true){
+                    map.moveMonsters();
+                    printNewBoard();
+                    Thread.sleep(500);
+                    if(isCancelled() )
+                        break;
+                }
+            } catch (RuntimeException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+    };
+    Thread thread;
 
     public static void main(String[] args) {
         launch(args);
@@ -81,6 +100,10 @@ public class Main extends Application {
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
+
+        thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
@@ -176,7 +199,7 @@ public class Main extends Application {
     private void printNewBoard() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        map.moveMonsters();
+
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
