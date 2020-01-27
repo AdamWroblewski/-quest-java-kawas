@@ -26,17 +26,17 @@ public class GameRandom {
 		if(directionToPlayer > 0.0) {
 			dx = playerX - actorX;
 			dy = playerY - actorY;
-			distance = dx * dx + dy * dy;
+			distance = dx * dx + dy * dy;// -> max(dx, dy, -dx, -dy);
 			dx = dx / distance * directionToPlayer;
 			dy = dy / distance * directionToPlayer;
 
-			distance = Math.sqrt(distance);
+			distance = Math.sqrt(distance);// dx * dx + dy * dy;
 			attackParam = Math.max( (7.0 - distance)/3.0, 0.0);
 			attackParam = Math.min(attackParam, 1.0);
 		} else
 			dx = dy = 0.0;
 
-		dx = attackParam*dx + (1.0 - attackParam)*Math.cos(angle);
+		dx = attackParam*dx + (1.0 - attackParam)*Math.cos(angle);// ( (x1 - x)/(x1 - x0) )*dx + ( (x - x0)/(x1 - x0) )*rand();
 		dy = attackParam*dy + (1.0 - attackParam)*Math.sin(angle);
 
 		return stepVectorToDirection(dx, dy);
