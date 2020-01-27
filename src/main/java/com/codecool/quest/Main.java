@@ -47,7 +47,7 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventory = new Label();
     Button buttonBar = new Button("Pick Up");
-    //
+//
     public static ObservableList<String> items = FXCollections.observableArrayList("gold", "sword", "shield");
     ListView<String> listView = new ListView<String>(items);
     int i;

@@ -4,7 +4,9 @@ import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
-import javafx.collections.ObservableList;
+import com.codecool.quest.logic.inventory.Keys;
+
+import java.security.Key;
 
 
 public class Player extends Actor {
@@ -20,6 +22,7 @@ public class Player extends Actor {
 
     @Override
     public void move(int dx, int dy){
+
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = nextCell.getActor();
         if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR)) {
@@ -29,7 +32,8 @@ public class Player extends Actor {
         } else if(actor != null && !actor.isPlayer() ){
             Enemy monster = (Enemy) actor;
             monster.setFightOn();
-        } else if (nextCell.getType().equals(CellType.CLOSEDDOOR)){
+        } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR))&& Main.items.contains("key")){
+            Main.items.remove("key");
             nextCell.setType(CellType.OPENEDDOOR);
         }
         direction.setDirection(dx, dy);
@@ -94,7 +98,8 @@ public class Player extends Actor {
                 Main.items.add(cell.getItem().getTileName());
                 cell.setItem(null);
             }
-        }catch(NullPointerException ignored){
+        }catch(NullPointerException e){
+            System.out.println(e + " caused by pickUpItem method when no item is on current cell");
         }
     }
 
