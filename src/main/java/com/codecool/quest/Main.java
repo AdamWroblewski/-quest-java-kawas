@@ -7,6 +7,7 @@ import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -46,9 +47,24 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventory = new Label();
     Button buttonBar = new Button("Pick Up");
-//
+    //
     public static ObservableList<String> items = FXCollections.observableArrayList("gold", "sword", "shield");
     ListView<String> listView = new ListView<String>(items);
+    int i;
+    Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            while (true) {
+                System.out.println(i++);
+                refresh();
+                Thread.sleep(1000);
+                if (isCancelled()) {
+                    break;
+                }
+            }
+            return null;
+        }
+    };
 
 
     public static void main(String[] args) {
@@ -81,6 +97,10 @@ public class Main extends Application {
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
+
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
