@@ -19,8 +19,8 @@ public abstract class Enemy extends Actor {
     public void move(int dx, int dy){
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = nextCell.getActor();
-        /*if(actor.isPlayer() )
-            actor.getAttacked(attackPower);*/
+        if(actor != null && actor.isPlayer() )
+            actor.getAttacked(attackPower);
 
         if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)){
             cell.setActor(null);

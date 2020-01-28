@@ -18,6 +18,8 @@ public class Player extends Actor {
 
     @Override
     public void move(int dx, int dy) {
+        if(health < 1)
+            return;
 
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = nextCell.getActor();
@@ -55,6 +57,9 @@ public class Player extends Actor {
         return monster;
     }
     public Enemy shoot(){
+        if(health < 1)
+            return null;
+
         Enemy monster, monsterShooted = null;
         countMonsters = 0;
         coordinates[0] = coordinates[1] = 0;

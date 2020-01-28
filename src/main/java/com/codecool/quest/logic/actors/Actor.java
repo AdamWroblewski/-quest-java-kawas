@@ -53,7 +53,7 @@ public abstract class Actor implements Drawable {
             }
             shield -= shieldDecrease;
             health -= healthDecrease;
-        } else {
+        } else if(health > 0){
             health -= attackForce;
         }
         return health > 0;
