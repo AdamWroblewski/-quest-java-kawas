@@ -56,7 +56,7 @@ public abstract class Enemy extends Actor {
                 break;
         }
         move(dx, dy);
-        direction.setDirection(dx, dy);
+//        direction.setDirection(dx, dy);
     }
 
     public abstract void setFightOn();

@@ -35,8 +35,8 @@ public class Player extends Actor {
         } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR_YELLOW)) && Main.items.contains("key Yellow")) {
             Main.items.remove("key Yellow");
             nextCell.setType(CellType.OPENEDDOOR_YELLOW);
-            direction.setDirection(dx, dy);
         }
+        direction.setDirection(dx, dy);
     }
 
     public Enemy shoot(){
