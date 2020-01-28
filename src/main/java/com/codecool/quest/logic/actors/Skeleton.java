@@ -57,7 +57,7 @@ public class Skeleton extends Enemy {
     public boolean setStunnedState(){
         if(health < 1) {
             stunned = true;
-            staggerCounter = 4;
+            staggerCounter = 4;// turns left in stagger state;
             stateName = "staggerState";
         }
         return false;
