@@ -5,6 +5,7 @@ import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -60,6 +61,7 @@ public class Main extends Application {
                 Thread.sleep(500);
                 if (map.moveMonsters()){
                     isMonstersMoved = true;
+                    Thread.sleep(5);
                 }
             } while (!isCancelled());
             return null;
@@ -70,6 +72,7 @@ public class Main extends Application {
         @Override
         protected Void call() throws Exception {
             while (true) {
+                Thread.sleep(4);
                 if (isMonstersMoved){
                     refresh();
                 }
@@ -162,14 +165,12 @@ public class Main extends Application {
     }
 
     private void refresh() {
-
         setDefaultPositionVariables();
 
         if (mapIsBiggerThanScreen()) {
             setNewPositionVariables();
         }
-
-        printNewBoard();
+        Platform.runLater(this::printNewBoard);
     }
 
     private void setDefaultPositionVariables() {
