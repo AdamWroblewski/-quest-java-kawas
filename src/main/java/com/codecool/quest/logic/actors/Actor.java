@@ -9,6 +9,8 @@ public abstract class Actor implements Drawable {
 
     protected Cell cell;
     protected int health = 100;
+    protected int shield = 0;
+    protected int attackPower = 10;
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -36,5 +38,24 @@ public abstract class Actor implements Drawable {
 
     public int getY() {
         return cell.getY();
+    }
+
+    protected boolean getAttacked(int attackForce){
+        if(shield > 0){
+            int healthDecrease = (health > 1)?1:0, shieldDecrease = attackForce - healthDecrease;
+            if(shieldDecrease > shield){
+                shieldDecrease = shield;
+                healthDecrease = attackForce - shieldDecrease;
+            }
+            shield -= shieldDecrease;
+            health -= healthDecrease;
+        } else {
+            health -= attackForce;
+        }
+        return health > 0;
+    }
+    public boolean changeHealth(int healthGrow){
+        health += healthGrow;
+        return health > 0;
     }
 }

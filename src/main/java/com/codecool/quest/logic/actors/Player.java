@@ -12,6 +12,9 @@ import java.security.Key;
 public class Player extends Actor {
 
     private Directions direction = Directions.INPLACE;
+    private int[] coordinates = new int[2];
+    private int countMonsters = 0;
+
     public Player(Cell cell) {
         super(cell);
     }
@@ -39,13 +42,65 @@ public class Player extends Actor {
         direction.setDirection(dx, dy);
     }
 
+    private Enemy neighbourMonster(int dx, int dy){
+        Cell cellCheck = cell.getNeighbor(dx, dy);
+        Enemy monster = null;
+
+        if(cellCheck != null){
+            monster = (Enemy) cellCheck.getActor();
+            if(monster != null){
+                coordinates[0] = dx;
+                coordinates[1] = dy;
+                countMonsters++;
+            }
+        }
+
+        return monster;
+    }
     public Enemy shoot(){
+        Enemy monster, monsterShooted = null;
+        countMonsters = 0;
+        coordinates[0] = coordinates[1] = 0;
+
+        monster = neighbourMonster(0, -1);
+        if(monster != null){
+            monsterShooted = monster;
+        }
+        monster = neighbourMonster(1, 0);
+        if(monster != null){
+            monsterShooted = monster;
+        }
+        monster = neighbourMonster(0, 1);
+        if(monster != null){
+            monsterShooted = monster;
+        }
+        monster = neighbourMonster(-1, 0);
+        if(monster != null){
+            monsterShooted = monster;
+        }
+
+        if(countMonsters < 1){
+            return null;
+        } else if(countMonsters == 1){
+            boolean isAlive = monsterShooted.getAttacked(attackPower);
+            if(!monsterShooted.canBeStunned() && !isAlive)
+                cell.getNeighbor(coordinates[0], coordinates[1]).setActor(null);
+
+            direction.setDirection(coordinates[0], coordinates[1]);
+
+            return monsterShooted;
+        }
+
         Cell cellCheck = cellByDirection();
         if(cellCheck == null)
             return null;
 
-        Enemy monster = (Enemy) cellCheck.getActor();
-        if(monster != null && !monster.canBeStunned() )
+        monster = (Enemy) cellCheck.getActor();
+        if(monster == null)
+            return null;
+
+        boolean isAlive = monster.getAttacked(attackPower);
+        if(!monster.canBeStunned() && !isAlive)
             cellCheck.setActor(null);
 
         return monster;
@@ -58,6 +113,7 @@ public class Player extends Actor {
         Enemy monster = (Enemy) cellCheck.getActor();
         if(monster != null && monster.canBeStunned() && monster.isStunned() ){
             cellCheck.setActor(null);
+            health++;
             return monster;
         }
 

@@ -12,6 +12,15 @@ public class GameRandom {
 
 	}
 
+	public String pickValue(String[] values){
+		int index = rand.nextInt(values.length);
+		return values[index];
+	}
+	public int pickValue(int[] values){
+		int index = rand.nextInt(values.length);
+		return values[index];
+	}
+
 	public int randRange(final int min, final int max){
 		if(min >= max){
 			throw new IllegalArgumentException("randRange: minimum should be lower then maximum!");
@@ -19,18 +28,15 @@ public class GameRandom {
 		return rand.nextInt(max - min) + min;
 	}
 
-	public Directions randMove(int actorX, int actorY, int playerX, int playerY){
-		double angle = rand.nextDouble()*360.0, dy, dx, distance = 1.0, attackParam = 0.0;
+	public Directions randMove(int playerToActorDx, int playerToActorDy, double distance){
+		double angle = rand.nextDouble()*360.0, dy, dx, distanceSqr = 1.0, attackParam = 0.0;
 		angle = Math.toRadians(angle);
 
 		if(directionToPlayer > 0.0) {
-			dx = playerX - actorX;
-			dy = playerY - actorY;
-			distance = dx * dx + dy * dy;// -> max(dx, dy, -dx, -dy);
-			dx = dx / distance * directionToPlayer;
-			dy = dy / distance * directionToPlayer;
+			distanceSqr = distance*distance;// -> max(dx, dy, -dx, -dy);
+			dx = playerToActorDx / distanceSqr * directionToPlayer;
+			dy = playerToActorDy / distanceSqr * directionToPlayer;
 
-			distance = Math.sqrt(distance);// dx * dx + dy * dy;
 			attackParam = Math.max( (7.0 - distance)/3.0, 0.0);
 			attackParam = Math.min(attackParam, 1.0);
 		} else
