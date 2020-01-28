@@ -57,9 +57,10 @@ public class Main extends Application {
         protected Void call() throws Exception {
             do {
                 isMonstersMoved = false;
-                map.moveMonsters();
                 Thread.sleep(500);
-                isMonstersMoved = true;
+                if (map.moveMonsters()){
+                    isMonstersMoved = true;
+                }
             } while (!isCancelled());
             return null;
         }
