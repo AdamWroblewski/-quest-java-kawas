@@ -31,6 +31,7 @@ public class Main extends Application {
     private int distanceFromTopBorder;
     private int xAxisMiddle;
     private int yAxisMiddle;
+    private boolean isMonstersMoved = false;
 
     private final int screenWidth = 25;
     private final int screenHeight = 20;
@@ -47,9 +48,36 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label inventory = new Label();
     Button buttonBar = new Button("Pick Up");
-
+    //
     public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
+
+    Task<Void> moveMonsters = new Task<>() {
+        @Override
+        protected Void call() throws Exception {
+            do {
+                isMonstersMoved = false;
+                map.moveMonsters();
+                Thread.sleep(500);
+                isMonstersMoved = true;
+            } while (!isCancelled());
+            return null;
+        }
+    };
+
+    Task<Void> refresh = new Task<>() {
+        @Override
+        protected Void call() throws Exception {
+            while (true) {
+                if (isMonstersMoved){
+                    refresh();
+                }
+                if (isCancelled()) {
+                    return null;
+                }
+            }
+        }
+    };
 
 
 
@@ -85,6 +113,14 @@ public class Main extends Application {
         primaryStage.show();
 
 
+        Thread threadMonstersMove = new Thread(moveMonsters);
+        Thread threadRefreshMap = new Thread(refresh);
+
+        threadMonstersMove.setDaemon(true);
+        threadRefreshMap.setDaemon(true);
+
+        threadMonstersMove.start();
+        threadRefreshMap.start();
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
@@ -203,5 +239,4 @@ public class Main extends Application {
     private boolean mapIsBiggerThanScreen() {
         return map.getWidth() > screenWidth || map.getHeight() > screenHeight;
     }
-
 }
