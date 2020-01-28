@@ -15,7 +15,7 @@ public abstract class Enemy extends Actor {
         attackPower = 5;
     }
 
-
+    @Override
     public void move(int dx, int dy){
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = nextCell.getActor();
