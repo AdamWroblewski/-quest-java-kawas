@@ -46,7 +46,6 @@ public class Main extends Application {
             screenHeight * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-    Label inventory = new Label();
     Button buttonBar = new Button("Pick Up");
     //
     public static ObservableList<String> items = FXCollections.observableArrayList();
@@ -92,7 +91,7 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
+        ui.add(healthLabel, 0, 1);
         ui.add(new Label("Inventory: "), 0, 5);
         ui.add(listView, 0, 10);
         ui.add(buttonBar, 0, 15);

@@ -22,7 +22,7 @@ public abstract class Enemy extends Actor {
 
     public void move(int dx, int dy){
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
+        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)){
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
