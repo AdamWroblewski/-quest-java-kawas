@@ -119,8 +119,6 @@ public class Main extends Application {
 
         threadMonstersMove.start();
         threadRefreshMap.start();
-
-
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
