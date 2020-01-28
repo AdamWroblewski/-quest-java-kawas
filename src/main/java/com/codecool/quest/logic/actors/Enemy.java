@@ -18,7 +18,11 @@ public abstract class Enemy extends Actor {
 
     public void move(int dx, int dy){
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)){
+        Actor actor = nextCell.getActor();
+        /*if(actor.isPlayer() )
+            actor.getAttacked(attackPower);*/
+
+        if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)){
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -52,6 +56,11 @@ public abstract class Enemy extends Actor {
         move(dx, dy);
         //direction.setDirection(dx, dy);
         return distanceToPlayer;
+    }
+
+    @Override
+    public boolean isPlayer(){
+        return false;
     }
 
     public abstract void setFightOn();

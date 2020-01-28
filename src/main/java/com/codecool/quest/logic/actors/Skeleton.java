@@ -39,10 +39,6 @@ public class Skeleton extends Enemy {
         return distance;
     }
 
-    @Override
-    public boolean isPlayer(){
-        return false;
-    }
 
     @Override
     public void setFightOn(){

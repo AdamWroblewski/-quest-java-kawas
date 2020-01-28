@@ -38,10 +38,6 @@ public class Ghost extends Enemy {
         return distanceToPlayer;
     }
 
-    @Override
-    public boolean isPlayer() {
-        return false;
-    }
 
     @Override
     public void setFightOn(){}
