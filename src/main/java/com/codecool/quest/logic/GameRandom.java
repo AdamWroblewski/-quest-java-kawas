@@ -12,6 +12,15 @@ public class GameRandom {
 
 	}
 
+	public String pickValue(String[] values){
+		int index = rand.nextInt(values.length);
+		return values[index];
+	}
+	public int pickValue(int[] values){
+		int index = rand.nextInt(values.length);
+		return values[index];
+	}
+
 	public int randRange(final int min, final int max){
 		if(min >= max){
 			throw new IllegalArgumentException("randRange: minimum should be lower then maximum!");
