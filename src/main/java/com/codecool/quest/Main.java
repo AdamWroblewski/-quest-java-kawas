@@ -31,6 +31,7 @@ public class Main extends Application {
     private int distanceFromTopBorder;
     private int xAxisMiddle;
     private int yAxisMiddle;
+    private boolean isMonstersMoved = false;
 
     private final int screenWidth = 25;
     private final int screenHeight = 20;
@@ -51,17 +52,30 @@ public class Main extends Application {
     public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
 
-    Task<Void> task = new Task<Void>() {
+    Task<Void> moveMonsters = new Task<>() {
+        @Override
+        protected Void call() throws Exception {
+            do {
+                isMonstersMoved = false;
+                map.moveMonsters();
+                Thread.sleep(500);
+                isMonstersMoved = true;
+            } while (!isCancelled());
+            return null;
+        }
+    };
+
+    Task<Void> refresh = new Task<>() {
         @Override
         protected Void call() throws Exception {
             while (true) {
-                refresh();
-                Thread.sleep(1000);
+                if (isMonstersMoved){
+                    refresh();
+                }
                 if (isCancelled()) {
-                    break;
+                    return null;
                 }
             }
-            return null;
         }
     };
 
@@ -97,9 +111,16 @@ public class Main extends Application {
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
 
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
+        Thread threadMonstersMove = new Thread(moveMonsters);
+        Thread threadRefreshMap = new Thread(refresh);
+
+        threadMonstersMove.setDaemon(true);
+        threadRefreshMap.setDaemon(true);
+
+        threadMonstersMove.start();
+        threadRefreshMap.start();
+
+
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
@@ -195,7 +216,6 @@ public class Main extends Application {
     private void printNewBoard() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        map.moveMonsters();
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
