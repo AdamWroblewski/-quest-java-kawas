@@ -14,10 +14,6 @@ public class Skeleton extends Enemy {
 
     }
 
-    @Override
-    public String getTileName() {
-        return stateName;
-    }
 
     @Override
     public void move(int dx, int dy) {

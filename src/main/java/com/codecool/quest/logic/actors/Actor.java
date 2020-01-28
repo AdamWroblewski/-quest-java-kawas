@@ -18,6 +18,9 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+    public String getTileName(){
+        return stateName;
+    }
     public abstract void move(int dx, int dy);
 
     public abstract boolean isPlayer();
