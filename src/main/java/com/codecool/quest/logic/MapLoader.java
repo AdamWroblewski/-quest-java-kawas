@@ -3,8 +3,7 @@ package com.codecool.quest.logic;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.inventory.Shield;
-import com.codecool.quest.logic.inventory.Keys;
+import com.codecool.quest.logic.inventory.*;
 
 
 import java.io.InputStream;

@@ -21,6 +21,7 @@ public abstract class Item implements Drawable {
         this.cell.setItem(this);
     }
 
+
     public String getColor() {
         return color;
     }
