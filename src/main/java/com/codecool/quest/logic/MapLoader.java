@@ -70,6 +70,14 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Keys(cell, "Yellow");
                             break;
+                        case 'w':
+                            cell.setType(CellType.FLOOR);
+                            new Sword(cell);
+                            break;
+                        case 'a':
+                            cell.setType(CellType.FLOOR);
+                            new Axe(cell);
+                            break;
                         case 'f':
                             cell.setType(CellType.STAIRSDOWN);
                             break;
