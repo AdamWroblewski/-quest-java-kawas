@@ -1,42 +1,61 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
 public abstract class Enemy extends Actor {
+    protected Directions direction = Directions.INPLACE;
     protected String stateName;
     protected boolean stunned;
 
     Enemy(Cell cell){
         super(cell);
         stunned = false;
+        attackPower = 5;
     }
 
     public String getTileName(){
         return stateName;
     }
 
-    public void moveToPlayer(Player player, GameRandom gameRandom){
-        int playerX = player.getX(), playerY = player.getY(),
-                monsterX = this.getX(), monsterY = this.getY();
+    public void move(int dx, int dy){
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if ((nextCell.getType().equals(CellType.FLOOR) && nextCell.getActor() == null) || nextCell.getType().equals(CellType.OPENEDDOOR)){
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+        }
+    }
+    public double moveToPlayer(Player player, GameRandom gameRandom){
+        int playerToMonsterDx, playerToMonsterDy;
+        playerToMonsterDx = player.getX() - this.getX();
+        playerToMonsterDy = player.getY() - this.getY();
 
-        Directions pathDirection = gameRandom.randMove(monsterX, monsterY, playerX, playerY);
+        double distanceToPlayer;
+        distanceToPlayer = Math.sqrt(playerToMonsterDx*playerToMonsterDx + playerToMonsterDy*playerToMonsterDy);
 
+        Directions pathDirection = gameRandom.randMove(playerToMonsterDx, playerToMonsterDy, distanceToPlayer);
+
+        int dx = 0, dy = 0;
         switch( pathDirection.getDirection() ){
             case 1:
-                move(0, -1);
+                dy = -1;
                 break;
             case 2:
-                move(1, 0);
+                dx = 1;
                 break;
             case 3:
-                move(0, 1);
+                dy = 1;
                 break;
             case 4:
-                move(-1, 0);
+                dx = -1;
                 break;
         }
+        move(dx, dy);
+        //direction.setDirection(dx, dy);
+        return distanceToPlayer;
     }
 
     public abstract void setFightOn();
