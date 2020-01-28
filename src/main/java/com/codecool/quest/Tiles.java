@@ -34,9 +34,15 @@ public class Tiles {
         tileMap.put("ghost1", new Tile(26, 6));
         tileMap.put("ghost2", new Tile(27, 6));
 
-        tileMap.put("closeddoor", new Tile(0, 9));
-        tileMap.put("openeddoor", new Tile(2, 9));
-        tileMap.put("key", new Tile(17, 23));
+        tileMap.put("closeddoor Blue", new Tile(0, 9));
+        tileMap.put("openeddoor Blue", new Tile(2, 9));
+        tileMap.put("closeddoor Yellow", new Tile(1, 11));
+        tileMap.put("openeddoor Yellow", new Tile(2, 11));
+        tileMap.put("closeddoor Red", new Tile(0, 12));
+        tileMap.put("openeddoor Red", new Tile(1, 12));
+        tileMap.put("key Blue", new Tile(17, 23));
+        tileMap.put("key Yellow", new Tile(16, 23));
+        tileMap.put("key Red", new Tile(18, 23));
         tileMap.put("shield", new Tile(7, 26));
         tileMap.put("button", new Tile(28, 20));
         tileMap.put("stairs down", new Tile(21, 0));

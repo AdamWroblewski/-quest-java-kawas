@@ -65,7 +65,11 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Keys(cell);
+                            new Keys(cell, "Blue");
+                            break;
+                        case 'K':
+                            cell.setType(CellType.FLOOR);
+                            new Keys(cell, "Yellow");
                             break;
                         case 'f':
                             cell.setType(CellType.STAIRSDOWN);
