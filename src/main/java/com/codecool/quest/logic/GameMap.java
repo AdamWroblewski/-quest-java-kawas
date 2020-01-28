@@ -46,11 +46,12 @@ public class GameMap {
         monsters.add(monster);
     }
 
-    public void moveMonsters(){
+    public boolean moveMonsters(){
         ListIterator<Enemy> iter = monsters.listIterator();
         while(iter.hasNext() ){
             iter.next().moveToPlayer(player, gameRandom);
         }
+        return true;
     }
 
     public void playerFight(){
