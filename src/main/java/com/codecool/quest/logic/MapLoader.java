@@ -32,11 +32,17 @@ public class MapLoader {
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
-                        case 'c':
-                            cell.setType(CellType.CLOSEDDOOR);
+                        case 'B':
+                            cell.setType(CellType.CLOSEDDOOR_BLUE);
                             break;
-                        case 'o':
-                            cell.setType(CellType.OPENEDDOOR);
+                        case 'b':
+                            cell.setType(CellType.OPENEDDOOR_BLUE);
+                            break;
+                        case 'Y':
+                            cell.setType(CellType.CLOSEDDOOR_YELLOW);
+                            break;
+                        case 'y':
+                            cell.setType(CellType.OPENEDDOOR_YELLOW);
                             break;
                         case '.':
                             cell.setType(CellType.FLOOR);
