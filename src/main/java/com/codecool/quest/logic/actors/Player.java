@@ -4,10 +4,6 @@ import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
-import com.codecool.quest.logic.inventory.Keys;
-
-import java.security.Key;
-
 
 public class Player extends Actor {
 
@@ -24,22 +20,26 @@ public class Player extends Actor {
     }
 
     @Override
-    public void move(int dx, int dy){
+    public void move(int dx, int dy) {
 
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = nextCell.getActor();
-        if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR)) {
+        if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)
+            || nextCell.getType().equals(CellType.OPENEDDOOR_YELLOW)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        } else if(actor != null && !actor.isPlayer() ){
+        } else if (actor != null && !actor.isPlayer()) {
             Enemy monster = (Enemy) actor;
             monster.setFightOn();
-        } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR))&& Main.items.contains("key")){
-            Main.items.remove("key");
-            nextCell.setType(CellType.OPENEDDOOR);
+        } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR_BLUE)) && Main.items.contains("key Blue")) {
+            Main.items.remove("key Blue");
+            nextCell.setType(CellType.OPENEDDOOR_BLUE);
+        } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR_YELLOW)) && Main.items.contains("key Yellow")) {
+            Main.items.remove("key Yellow");
+            nextCell.setType(CellType.OPENEDDOOR_YELLOW);
+            direction.setDirection(dx, dy);
         }
-        direction.setDirection(dx, dy);
     }
 
     private Enemy neighbourMonster(int dx, int dy){

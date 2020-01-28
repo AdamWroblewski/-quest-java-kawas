@@ -3,8 +3,7 @@ package com.codecool.quest.logic;
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.inventory.Shield;
-import com.codecool.quest.logic.inventory.Keys;
+import com.codecool.quest.logic.inventory.*;
 
 
 import java.io.InputStream;
@@ -32,11 +31,17 @@ public class MapLoader {
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
-                        case 'c':
-                            cell.setType(CellType.CLOSEDDOOR);
+                        case 'B':
+                            cell.setType(CellType.CLOSEDDOOR_BLUE);
                             break;
-                        case 'o':
-                            cell.setType(CellType.OPENEDDOOR);
+                        case 'b':
+                            cell.setType(CellType.OPENEDDOOR_BLUE);
+                            break;
+                        case 'Y':
+                            cell.setType(CellType.CLOSEDDOOR_YELLOW);
+                            break;
+                        case 'y':
+                            cell.setType(CellType.OPENEDDOOR_YELLOW);
                             break;
                         case '.':
                             cell.setType(CellType.FLOOR);
@@ -59,7 +64,11 @@ public class MapLoader {
                             break;
                         case 'k':
                             cell.setType(CellType.FLOOR);
-                            new Keys(cell);
+                            new Keys(cell, "Blue");
+                            break;
+                        case 'K':
+                            cell.setType(CellType.FLOOR);
+                            new Keys(cell, "Yellow");
                             break;
                         case 'f':
                             cell.setType(CellType.STAIRSDOWN);
