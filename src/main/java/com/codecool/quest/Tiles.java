@@ -35,6 +35,7 @@ public class Tiles {
         tileMap.put("staggerState", new Tile(0, 15));
         tileMap.put("ghost1", new Tile(26, 6));
         tileMap.put("ghost2", new Tile(27, 6));
+        tileMap.put("ghostHidden", new Tile(1, 0));
 
         tileMap.put("closeddoor Blue", new Tile(0, 9));
         tileMap.put("openeddoor Blue", new Tile(2, 9));

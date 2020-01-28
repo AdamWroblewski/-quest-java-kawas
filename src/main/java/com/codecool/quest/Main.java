@@ -31,6 +31,7 @@ public class Main extends Application {
     private int distanceFromTopBorder;
     private int xAxisMiddle;
     private int yAxisMiddle;
+    private boolean isMonstersMoved = false;
 
     private final int screenWidth = 25;
     private final int screenHeight = 20;
@@ -46,28 +47,38 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Button buttonBar = new Button("Pick Up");
-
+    //
     public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
 
-    Task<Void> task = new Task<Void>() {
+    Task<Void> moveMonsters = new Task<>() {
         @Override
         protected Void call() throws Exception {
-            try {
-                while(true){
-                    map.moveMonsters();
-                    printNewBoard();
-                    Thread.sleep(500);
-                    if(isCancelled() )
-                        break;
-                }
-            } catch (RuntimeException e){
-                e.printStackTrace();
-            }
+            do {
+                isMonstersMoved = false;
+                map.moveMonsters();
+                Thread.sleep(500);
+                isMonstersMoved = true;
+            } while (!isCancelled());
             return null;
         }
     };
-    Thread thread;
+
+    Task<Void> refresh = new Task<>() {
+        @Override
+        protected Void call() throws Exception {
+            while (true) {
+                if (isMonstersMoved){
+                    refresh();
+                }
+                if (isCancelled()) {
+                    return null;
+                }
+            }
+        }
+    };
+
+
 
     public static void main(String[] args) {
         launch(args);
@@ -100,9 +111,15 @@ public class Main extends Application {
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
 
-        thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
+
+        Thread threadMonstersMove = new Thread(moveMonsters);
+        Thread threadRefreshMap = new Thread(refresh);
+
+        threadMonstersMove.setDaemon(true);
+        threadRefreshMap.setDaemon(true);
+
+        threadMonstersMove.start();
+        threadRefreshMap.start();
     }
 
     private void mouseEvent(MouseEvent mouseEvent) {
@@ -221,5 +238,4 @@ public class Main extends Application {
     private boolean mapIsBiggerThanScreen() {
         return map.getWidth() > screenWidth || map.getHeight() > screenHeight;
     }
-
 }

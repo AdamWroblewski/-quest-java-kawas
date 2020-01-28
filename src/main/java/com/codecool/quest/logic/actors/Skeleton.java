@@ -1,8 +1,6 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
 public class Skeleton extends Enemy {
@@ -33,14 +31,16 @@ public class Skeleton extends Enemy {
     }
 
     @Override
-    public void moveToPlayer(Player player, GameRandom gameRandom){
+    public double moveToPlayer(Player player, GameRandom gameRandom){
+        double distance = 0.0;
         if(stunned){
             staggerCounter--;
             if(staggerCounter == 0) unsetStunnedState();
-            return;
+            return distance;
         }
 
-        super.moveToPlayer(player, gameRandom);
+        distance = super.moveToPlayer(player, gameRandom);
+        return distance;
     }
 
     @Override
@@ -55,12 +55,15 @@ public class Skeleton extends Enemy {
 
     @Override
     public boolean setStunnedState(){
-        stunned = true;
-        staggerCounter = 4;
-        stateName = "staggerState";
+        if(health < 1) {
+            stunned = true;
+            staggerCounter = 4;
+            stateName = "staggerState";
+        }
         return false;
     }
     public void unsetStunnedState(){
+        health = 40;
         stunned = false;
         stateName = "skeleton";
     }

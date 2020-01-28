@@ -13,7 +13,7 @@ public abstract class Enemy extends Actor {
     Enemy(Cell cell){
         super(cell);
         stunned = false;
-        attackPower = 10;
+        attackPower = 5;
     }
 
     public String getTileName(){
@@ -28,9 +28,7 @@ public abstract class Enemy extends Actor {
             cell = nextCell;
         }
     }
-    public void moveToPlayer(Player player, GameRandom gameRandom){
-        int playerX = player.getX(), playerY = player.getY(),
-                monsterX = this.getX(), monsterY = this.getY();
+    public double moveToPlayer(Player player, GameRandom gameRandom){
         int playerToMonsterDx, playerToMonsterDy;
         playerToMonsterDx = player.getX() - this.getX();
         playerToMonsterDy = player.getY() - this.getY();
@@ -56,7 +54,8 @@ public abstract class Enemy extends Actor {
                 break;
         }
         move(dx, dy);
-//        direction.setDirection(dx, dy);
+        //direction.setDirection(dx, dy);
+        return distanceToPlayer;
     }
 
     public abstract void setFightOn();
