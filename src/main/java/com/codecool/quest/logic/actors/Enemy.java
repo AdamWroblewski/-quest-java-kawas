@@ -7,7 +7,6 @@ import com.codecool.quest.logic.GameRandom;
 
 public abstract class Enemy extends Actor {
     protected Directions direction = Directions.INPLACE;
-    protected String stateName;
     protected boolean stunned;
 
     Enemy(Cell cell){
