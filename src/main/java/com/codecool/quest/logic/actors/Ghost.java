@@ -12,6 +12,7 @@ public class Ghost extends Enemy {
         stateName = "ghostHidden";
         health = 50;
         stunned = true;
+        attackPower = 3;
     }
 
     @Override

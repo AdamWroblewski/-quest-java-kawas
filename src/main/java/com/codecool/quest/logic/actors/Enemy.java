@@ -13,7 +13,7 @@ public abstract class Enemy extends Actor {
     Enemy(Cell cell){
         super(cell);
         stunned = false;
-        attackPower = 10;
+        attackPower = 5;
     }
 
     public String getTileName(){
@@ -54,7 +54,7 @@ public abstract class Enemy extends Actor {
                 break;
         }
         move(dx, dy);
-        direction.setDirection(dx, dy);
+        //direction.setDirection(dx, dy);
         return distanceToPlayer;
     }
 
