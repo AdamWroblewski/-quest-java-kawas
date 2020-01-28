@@ -51,8 +51,8 @@ public class Tiles {
         tileMap.put("stairs down", new Tile(21, 0));
         tileMap.put("ladder", new Tile(21, 1));
         tileMap.put("tree", new Tile(0, 1));
-        tileMap.put("sword", new Tile(2, 28));
-        tileMap.put("axe", new Tile(8, 29));
+        tileMap.put("Sword", new Tile(2, 28));
+        tileMap.put("Axe", new Tile(8, 29));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
