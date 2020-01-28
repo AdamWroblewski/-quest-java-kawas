@@ -9,7 +9,7 @@ public class Ghost extends Enemy {
 
     public Ghost(Cell cell){
         super(cell);
-        stateName = "ghost1";
+        stateName = "ghostHidden";
         health = 50;
         stunned = true;
     }
@@ -47,7 +47,7 @@ public class Ghost extends Enemy {
 
     @Override
     public boolean setStunnedState(){
-        return true;
+        return health < 1;
     }
     @Override
     public boolean canBeStunned(){

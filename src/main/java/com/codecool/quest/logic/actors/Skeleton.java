@@ -55,12 +55,15 @@ public class Skeleton extends Enemy {
 
     @Override
     public boolean setStunnedState(){
-        stunned = true;
-        staggerCounter = 4;
-        stateName = "staggerState";
+        if(health < 1) {
+            stunned = true;
+            staggerCounter = 4;
+            stateName = "staggerState";
+        }
         return false;
     }
     public void unsetStunnedState(){
+        health = 40;
         stunned = false;
         stateName = "skeleton";
     }

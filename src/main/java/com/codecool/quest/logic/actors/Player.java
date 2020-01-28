@@ -82,7 +82,8 @@ public class Player extends Actor {
         if(countMonsters < 1){
             return null;
         } else if(countMonsters == 1){
-            if(!monsterShooted.canBeStunned() )
+            monsterShooted.changeHealth(-10);
+            if(!monsterShooted.canBeStunned() && monsterShooted.getHealth() <= 0)
                 cell.getNeighbor(coordinates[0], coordinates[1]).setActor(null);
 
             direction.setDirection(coordinates[0], coordinates[1]);
@@ -95,7 +96,11 @@ public class Player extends Actor {
             return null;
 
         monster = (Enemy) cellCheck.getActor();
-        if(monster != null && !monster.canBeStunned() )
+        if(monster == null)
+            return null;
+
+        monster.changeHealth(-10);
+        if(!monster.canBeStunned() && monster.getHealth() <= 0)
             cellCheck.setActor(null);
 
         return monster;
