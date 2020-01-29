@@ -40,6 +40,7 @@ public class Player extends Actor {
             Main.items.remove("key Yellow");
             nextCell.setType(CellType.OPENEDDOOR_YELLOW);
         } else if (isNextCellTeleportEntry(nextCell)) {
+            // calculate teleport exit cords and move player character to it
             int targetCellX = cell.getTeleportExitX() - nextCell.getX() + dx;
             int targetCellY = cell.getTeleportExitY() - nextCell.getY() + dy;
             this.move(targetCellX, targetCellY);

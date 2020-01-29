@@ -271,6 +271,7 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell, includedCellX, includedCellY);
                 }
                 if (isMonstersMoved) {
+                    // animate tiles once per monster turn
                     changeTeleportEntryState(cell);
                     changeTeleportExitState(cell);
                 }
