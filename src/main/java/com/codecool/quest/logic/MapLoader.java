@@ -87,6 +87,33 @@ public class MapLoader {
                         case 't':
                             cell.setType(CellType.TREE);
                             break;
+                        case ',':
+                            cell.setType(CellType.WATER);
+                            break;
+                        case '(':
+                            cell.setType(CellType.WATER_LEFT_EDGE);
+                            break;
+                        case ')':
+                            cell.setType(CellType.WATER_RIGHT_EDGE);
+                            break;
+                        case '[':
+                            cell.setType(CellType.WATER_UPPER_EDGE);
+                            break;
+                        case ']':
+                            cell.setType(CellType.WATER_LOWER_EDGE);
+                            break;
+                        case '<':
+                            cell.setType(CellType.WATER_LOWER_LEFT_CORNER);
+                            break;
+                        case '>':
+                            cell.setType(CellType.WATER_LOWER_RIGHT_CORNER);
+                            break;
+                        case '{':
+                            cell.setType(CellType.WATER_UPPER_LEFT_CORNER);
+                            break;
+                        case '}':
+                            cell.setType(CellType.WATER_UPPER_RIGHT_CORNER);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

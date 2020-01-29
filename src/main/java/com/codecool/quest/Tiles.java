@@ -38,6 +38,16 @@ public class Tiles {
         tileMap.put("ghostHidden", new Tile(1, 0));
         tileMap.put("Possessed security", new Tile(25, 9));
 
+
+        tileMap.put("water", new Tile(8, 5));
+        tileMap.put("water upper left corner", new Tile(9, 4));
+        tileMap.put("water lower left corner", new Tile(9, 6));
+        tileMap.put("water upper right corner", new Tile(11, 4));
+        tileMap.put("water lower right corner", new Tile(11, 6));
+        tileMap.put("water left edge", new Tile(9, 5));
+        tileMap.put("water right edge", new Tile(11, 5));
+        tileMap.put("water upper edge", new Tile(10, 4));
+        tileMap.put("water lower edge", new Tile(10, 6));
         tileMap.put("closeddoor Blue", new Tile(0, 9));
         tileMap.put("openeddoor Blue", new Tile(2, 9));
         tileMap.put("closeddoor Yellow", new Tile(1, 11));
@@ -48,7 +58,6 @@ public class Tiles {
         tileMap.put("key Yellow", new Tile(16, 23));
         tileMap.put("key Red", new Tile(18, 23));
         tileMap.put("shield", new Tile(7, 26));
-        tileMap.put("button", new Tile(28, 20));
         tileMap.put("stairs down", new Tile(21, 0));
         tileMap.put("ladder", new Tile(21, 1));
         tileMap.put("tree", new Tile(0, 1));
