@@ -4,6 +4,7 @@ import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
+import com.codecool.quest.logic.inventory.*;
 
 public class Player extends Actor {
 
@@ -154,10 +155,25 @@ public class Player extends Actor {
         try{
             if(cell.getItem().getTileName() != null){
                 Main.items.add(cell.getItem().getTileName());
+                if(cell.getItem() instanceof Weapons){
+                    changeAppearance(cell.getItem());
+                } else if (cell.getItem() instanceof Shield){
+                    this.shield += ((Shield) cell.getItem()).addShield();
+                }
                 cell.setItem(null);
             }
         }catch(NullPointerException e){
             System.out.println(e + " caused by pickUpItem method when no item is on current cell");
+        }
+    }
+
+    private void changeAppearance(Item item) {
+        if (item instanceof Sword){
+            this.stateName = "player with sword";
+            this.attackPower += ((Sword) item).addAttackPower();
+        } else if(item instanceof Axe){
+            this.stateName = "player with axe";
+            this.attackPower += ((Axe) item).addAttackPower();
         }
     }
 

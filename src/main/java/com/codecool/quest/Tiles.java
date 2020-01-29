@@ -29,7 +29,7 @@ public class Tiles {
         tileMap.put("floor", new Tile(2, 0));
         tileMap.put("player", new Tile(23, 0));
         tileMap.put("player with sword", new Tile(27, 0));
-        tileMap.put("player with axe", new Tile(27, 1));
+        tileMap.put("player with axe", new Tile(23, 1));
         /* Enemies: */
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("staggerState", new Tile(0, 15));

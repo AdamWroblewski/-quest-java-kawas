@@ -32,6 +32,7 @@ public abstract class Actor implements Drawable {
     public Cell getCell() {
         return cell;
     }
+
     public void setCEll(Cell newCell){
         cell = newCell;
     }
@@ -61,5 +62,13 @@ public abstract class Actor implements Drawable {
     public boolean changeHealth(int healthGrow){
         health += healthGrow;
         return health > 0;
+    }
+
+    public int getShield(){
+        return shield;
+    }
+
+    public int getAttackPower(){
+        return attackPower;
     }
 }
