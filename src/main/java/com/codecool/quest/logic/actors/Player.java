@@ -11,6 +11,10 @@ public class Player extends Actor {
     private Directions direction = Directions.INPLACE;
     private int[] coordinates = new int[2];
     private int countMonsters = 0;
+    /* Values to set to back on when extras work ends: */
+    private int healthToReset;
+    private int shieldToReset;
+    private int attackPowerToReset;
 
     public Player(Cell cell) {
         super(cell);
