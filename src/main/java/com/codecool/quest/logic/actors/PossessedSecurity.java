@@ -4,7 +4,6 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameRandom;
 
 public class PossessedSecurity extends Enemy {
-	private int staggerCounter = 0;
 
 	public PossessedSecurity(Cell cell){
 		super(cell);
@@ -43,15 +42,6 @@ public class PossessedSecurity extends Enemy {
 
 	}
 
-	@Override
-	public boolean setStunnedState() {
-		if(health < 1) {
-			stunned = true;
-			staggerCounter = 4;// turns left in stagger state;
-			stateName = "staggerState";
-		}
-		return false;
-	}
 	public void unsetStunnedState(){
 		health = 60;
 		shield = 20;

@@ -7,6 +7,7 @@ import com.codecool.quest.logic.GameRandom;
 
 public abstract class Enemy extends Actor {
     protected Directions direction = Directions.INPLACE;
+    protected int staggerCounter = 0;
     protected double viewDistance;
     protected boolean stunned;
 
@@ -66,7 +67,14 @@ public abstract class Enemy extends Actor {
     }
 
     public abstract void setFightOn();
-    public abstract boolean setStunnedState();
+    public boolean setStunnedState(){
+        if(health < 1) {
+            stunned = true;
+            staggerCounter = 4;// remaining turns in stagger state;
+            stateName = "staggerState";
+        }
+        return false;
+    }
 
     public boolean isStunned(){
         return stunned;
