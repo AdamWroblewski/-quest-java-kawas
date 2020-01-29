@@ -39,6 +39,10 @@ public class Tiles {
         tileMap.put("Possessed security", new Tile(25, 9));
 
 
+
+        tileMap.put("left bridgehead", new Tile(15, 5));
+        tileMap.put("right bridgehead", new Tile(18, 5));
+        tileMap.put("bridge", new Tile(16, 5));
         tileMap.put("water", new Tile(8, 5));
         tileMap.put("water upper left corner", new Tile(9, 4));
         tileMap.put("water lower left corner", new Tile(9, 6));

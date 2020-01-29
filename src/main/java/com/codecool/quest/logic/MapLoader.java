@@ -114,6 +114,15 @@ public class MapLoader {
                         case '}':
                             cell.setType(CellType.WATER_UPPER_RIGHT_CORNER);
                             break;
+                        case '\\':
+                            cell.setType(CellType.LEFT_BRIDGEHEAD);
+                            break;
+                        case '-':
+                            cell.setType(CellType.BRIDGE);
+                            break;
+                        case '/':
+                            cell.setType(CellType.RIGHT_BRIDGEHEAD);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
