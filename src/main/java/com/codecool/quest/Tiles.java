@@ -39,6 +39,9 @@ public class Tiles {
         tileMap.put("Possessed security", new Tile(25, 9));
 
         /*map objects*/
+        tileMap.put("teleport target first state", new Tile(20, 24));
+        tileMap.put("teleport target second state", new Tile(21, 24));
+        tileMap.put("teleport target third state", new Tile(21, 23));
         tileMap.put("teleport first state", new Tile(1, 9));
         tileMap.put("teleport second state", new Tile(1, 8));
         tileMap.put("left bridgehead", new Tile(15, 5));
