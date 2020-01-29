@@ -25,6 +25,10 @@ public abstract class Actor implements Drawable {
 
     public abstract boolean isPlayer();
 
+    public boolean isDead(){
+        return health < 1;
+    }
+
     public int getHealth() {
         return health;
     }

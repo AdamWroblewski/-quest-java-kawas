@@ -28,7 +28,6 @@ public class GameMap {
             }
         }
         monsters = new ArrayList<>();
-printMessage(0, 1, "G", "A", "M", "E");
     }
 
     public Cell getCell(int x, int y) {
@@ -40,12 +39,13 @@ printMessage(0, 1, "G", "A", "M", "E");
     }
 
     public Player getPlayer() {
+        if(player.isDead() ){
+            printMessage(0, 1, "G", "A", "M", "E");
+            printMessage(0, 6, "O", "V", "E", "R");
+        }
         return player;
     }
 
-    public void setChar(){
-        new Notes(cells[1][1]);
-    }
     public void addMonster(Enemy monster){
         monsters.add(monster);
     }
