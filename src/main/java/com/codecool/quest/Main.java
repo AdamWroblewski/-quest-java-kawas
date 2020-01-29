@@ -218,6 +218,8 @@ public class Main extends Application {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
+        map.countTimer();
+
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
@@ -229,6 +231,8 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), includedCellX, includedCellY);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), includedCellX, includedCellY);
+                } else if(cell.getNote() != null){
+                    Tiles.drawTile(context, cell.getNote(), includedCellX, includedCellY);
                 } else {
                     Tiles.drawTile(context, cell, includedCellX, includedCellY);
                 }

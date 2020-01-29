@@ -14,6 +14,7 @@ public class GameMap {
     private int height;
     private Cell[][] cells;
     GameRandom gameRandom = new GameRandom();
+    private int timer = 0;
 
     private Player player;
     private List<Enemy> monsters;
@@ -39,6 +40,10 @@ public class GameMap {
     }
 
     public Player getPlayer() {
+        if(player.isDead() ){
+            printMessage(0, 1, "GAME");
+            printMessage(0, 6, "O", "V", "E", "R");
+        }
         return player;
     }
 
@@ -73,6 +78,50 @@ public class GameMap {
 
         monsters.remove(monster);
         return true;
+    }
+
+    public void printMessage(int row, int col, String... chars){
+        int colStep = col;
+        for(String character: chars){
+            cells[colStep][row].printChar(character);
+            colStep++;
+        }
+    }
+    public void printMessage(int row, int col, String message){
+        int colStep = col, i, n = message.length();
+        try {
+            for (i = 0; i < n; i++, colStep++) {
+                String s = "" + message.charAt(i);
+                cells[colStep][row].printChar(s);
+            }
+        } catch(NullPointerException e){
+            System.out.println("printMessage error: " + e.getMessage());
+        }
+    }
+    public void clearMessage(int row, int col, int strLength){
+        int colStep = col, i;
+        for(i = 0; i < strLength; i++, colStep++)
+            cells[colStep][row].setNote(null);
+    }
+
+    public void setTimer(int timeFrames){
+        timer = timeFrames;
+
+        String timeStr = Integer.toString(timer);
+
+        clearMessage(0, 1, 5);
+        printMessage(0, 1, timeStr);
+    }
+    public void countTimer(){
+        if(timer < 1)
+            return;
+
+        timer--;
+        String timeStr = Integer.toString(timer);
+
+        clearMessage(0, 1, 5);
+        if(timer > 0)
+            printMessage(0, 1, timeStr);
     }
 
     public int getWidth() {
