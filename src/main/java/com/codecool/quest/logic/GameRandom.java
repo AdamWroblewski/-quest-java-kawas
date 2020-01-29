@@ -28,7 +28,7 @@ public class GameRandom {
 		return rand.nextInt(max - min) + min;
 	}
 
-	public Directions randMove(int playerToActorDx, int playerToActorDy, double distance){
+	public Directions randMove(int playerToActorDx, int playerToActorDy, double distance, double viewDistance){
 		double angle = rand.nextDouble()*360.0, dy, dx, distanceSqr = 1.0, attackParam = 0.0;
 		angle = Math.toRadians(angle);
 
@@ -37,7 +37,7 @@ public class GameRandom {
 			dx = playerToActorDx / distanceSqr * directionToPlayer;
 			dy = playerToActorDy / distanceSqr * directionToPlayer;
 
-			attackParam = Math.max( (7.0 - distance)/3.0, 0.0);
+			attackParam = Math.max( (viewDistance - distance)/3.0, 0.0);
 			attackParam = Math.min(attackParam, 1.0);
 		} else
 			dx = dy = 0.0;

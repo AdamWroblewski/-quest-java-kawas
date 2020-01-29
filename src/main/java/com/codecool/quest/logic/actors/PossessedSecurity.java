@@ -11,6 +11,7 @@ public class PossessedSecurity extends Enemy {
 		stateName = "Possessed security";
 		health = 70;
 		shield = 20;
+		viewDistance = 12.0;
 	}
 
 	@Override

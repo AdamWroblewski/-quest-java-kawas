@@ -11,7 +11,7 @@ public class Skeleton extends Enemy {
         super(cell);
         stateName = "skeleton";
         health = 50;
-
+        viewDistance = 6.0;
     }
 
 

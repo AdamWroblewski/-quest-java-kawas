@@ -7,12 +7,14 @@ import com.codecool.quest.logic.GameRandom;
 
 public abstract class Enemy extends Actor {
     protected Directions direction = Directions.INPLACE;
+    protected double viewDistance;
     protected boolean stunned;
 
     Enemy(Cell cell){
         super(cell);
         stunned = false;
         attackPower = 5;
+        viewDistance = 7.0;
     }
 
     @Override
@@ -36,7 +38,7 @@ public abstract class Enemy extends Actor {
         double distanceToPlayer;
         distanceToPlayer = Math.sqrt(playerToMonsterDx*playerToMonsterDx + playerToMonsterDy*playerToMonsterDy);
 
-        Directions pathDirection = gameRandom.randMove(playerToMonsterDx, playerToMonsterDy, distanceToPlayer);
+        Directions pathDirection = gameRandom.randMove(playerToMonsterDx, playerToMonsterDy, distanceToPlayer, viewDistance);
 
         int dx = 0, dy = 0;
         switch( pathDirection.getDirection() ){
