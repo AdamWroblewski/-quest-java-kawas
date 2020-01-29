@@ -4,6 +4,11 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Player;
+import com.codecool.quest.logic.inventory.FirstAid;
+import com.codecool.quest.logic.inventory.Item;
+import com.codecool.quest.logic.inventory.Weapons;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -21,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -36,7 +42,7 @@ public class Main extends Application {
 
     private final int screenWidth = 25;
     private final int screenHeight = 20;
-    List<String> mapList = new ArrayList<>(){{
+    List<String> mapList = new ArrayList<>() {{
         add("/map.txt");
         add("/map2.txt");
         add("/map3.txt");
@@ -60,7 +66,7 @@ public class Main extends Application {
             do {
                 isMonstersMoved = false;
                 Thread.sleep(500);
-                if (map.moveMonsters()){
+                if (map.moveMonsters()) {
                     isMonstersMoved = true;
                     Thread.sleep(5);
                 }
@@ -74,7 +80,7 @@ public class Main extends Application {
         protected Void call() throws Exception {
             while (true) {
                 Thread.sleep(4);
-                if (isMonstersMoved){
+                if (isMonstersMoved) {
                     refresh();
                 }
                 if (isCancelled()) {
@@ -85,9 +91,31 @@ public class Main extends Application {
     };
 
 
-
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void checkInventory(Item item) {
+        if (item instanceof Weapons) {
+            if (item.getTileName().equals("Axe") && items.contains("Sword")) {
+                items.remove("Sword");
+                items.add(item.getTileName());
+            } else if (item.getTileName().equals("Sword") && items.contains("Axe")) {
+                items.remove("Axe");
+                items.add(item.getTileName());
+            }
+            else if ((item.getTileName().equals("Axe") && items.contains("Axe")) ||
+                    (item.getTileName().equals("Sword") && items.contains("Sword"))) {
+            }else {
+                items.add(item.getTileName());
+            }
+        }
+        else {
+            if ((!item.getTileName().equals("First Aid")) &&
+                    (item.getTileName().equals("Shield") && !items.contains("Shield"))) {
+                items.add(item.getTileName());
+            }
+        }
     }
 
     @Override

@@ -47,13 +47,15 @@ public class Tiles {
         tileMap.put("key Blue", new Tile(17, 23));
         tileMap.put("key Yellow", new Tile(16, 23));
         tileMap.put("key Red", new Tile(18, 23));
-        tileMap.put("shield", new Tile(7, 26));
+        tileMap.put("Shield", new Tile(7, 26));
         tileMap.put("button", new Tile(28, 20));
         tileMap.put("stairs down", new Tile(21, 0));
         tileMap.put("ladder", new Tile(21, 1));
         tileMap.put("tree", new Tile(0, 1));
         tileMap.put("Sword", new Tile(2, 28));
         tileMap.put("Axe", new Tile(8, 29));
+        tileMap.put("First Aid", new Tile(23, 22));
+
 
         /* Letters: */
         tileMap.put("A", new Tile(19, 30));

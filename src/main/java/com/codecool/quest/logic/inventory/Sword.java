@@ -4,7 +4,7 @@ import com.codecool.quest.logic.Cell;
 
 public class Sword extends Weapons{
 
-    final int swordAttackPower = 5; //+5
+    private final int swordAttackPower = 5; //+5
 
     public Sword(Cell cell) {
         super(cell);

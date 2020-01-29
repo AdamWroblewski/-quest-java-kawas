@@ -9,4 +9,5 @@ public abstract class Weapons extends Item {
         super(cell);
     }
 
+    public abstract int addAttackPower();
 }
