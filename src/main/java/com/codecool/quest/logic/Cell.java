@@ -55,10 +55,17 @@ public class Cell implements Drawable {
         return item;
     }
 
+    public Notes getNote(){
+        return noteChar;
+    }
+
     public Cell getNeighbor(int dx, int dy) {
         return gameMap.getCell(x + dx, y + dy);
     }
 
+    public void printChar(String tileName){
+        noteChar = new Notes(this, tileName);
+    }
 
     @Override
     public String getTileName() {
