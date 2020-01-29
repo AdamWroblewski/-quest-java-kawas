@@ -1,7 +1,6 @@
 package com.codecool.quest.logic.inventory;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Drawable;
 
 

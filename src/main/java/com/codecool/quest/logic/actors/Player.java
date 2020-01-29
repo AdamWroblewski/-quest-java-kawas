@@ -4,6 +4,7 @@ import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
+import com.codecool.quest.logic.inventory.*;
 
 public class Player extends Actor {
 
@@ -46,13 +47,13 @@ public class Player extends Actor {
         direction.setDirection(dx, dy);
     }
 
-    private Enemy neighbourMonster(int dx, int dy){
+    private Enemy neighbourMonster(int dx, int dy) {
         Cell cellCheck = cell.getNeighbor(dx, dy);
         Enemy monster = null;
 
-        if(cellCheck != null){
+        if (cellCheck != null) {
             monster = (Enemy) cellCheck.getActor();
-            if(monster != null){
+            if (monster != null) {
                 coordinates[0] = dx;
                 coordinates[1] = dy;
                 countMonsters++;
@@ -61,8 +62,9 @@ public class Player extends Actor {
 
         return monster;
     }
-    public Enemy shoot(){
-        if(health < 1)
+
+    public Enemy shoot() {
+        if (health < 1)
             return null;
 
         Enemy monster, monsterShooted = null;
@@ -70,27 +72,27 @@ public class Player extends Actor {
         coordinates[0] = coordinates[1] = 0;
 
         monster = neighbourMonster(0, -1);
-        if(monster != null){
+        if (monster != null) {
             monsterShooted = monster;
         }
         monster = neighbourMonster(1, 0);
-        if(monster != null){
+        if (monster != null) {
             monsterShooted = monster;
         }
         monster = neighbourMonster(0, 1);
-        if(monster != null){
+        if (monster != null) {
             monsterShooted = monster;
         }
         monster = neighbourMonster(-1, 0);
-        if(monster != null){
+        if (monster != null) {
             monsterShooted = monster;
         }
 
-        if(countMonsters < 1){
+        if (countMonsters < 1) {
             return null;
-        } else if(countMonsters == 1){
+        } else if (countMonsters == 1) {
             boolean isAlive = monsterShooted.getAttacked(attackPower);
-            if(!monsterShooted.canBeStunned() && !isAlive)
+            if (!monsterShooted.canBeStunned() && !isAlive)
                 cell.getNeighbor(coordinates[0], coordinates[1]).setActor(null);
 
             direction.setDirection(coordinates[0], coordinates[1]);
@@ -99,26 +101,27 @@ public class Player extends Actor {
         }
 
         Cell cellCheck = cellByDirection();
-        if(cellCheck == null)
+        if (cellCheck == null)
             return null;
 
         monster = (Enemy) cellCheck.getActor();
-        if(monster == null)
+        if (monster == null)
             return null;
 
         boolean isAlive = monster.getAttacked(attackPower);
-        if(!monster.canBeStunned() && !isAlive)
+        if (!monster.canBeStunned() && !isAlive)
             cellCheck.setActor(null);
 
         return monster;
     }
-    public Actor gloryKill(){
+
+    public Actor gloryKill() {
         Cell cellCheck = cellByDirection();
-        if(cellCheck == null)
+        if (cellCheck == null)
             return null;
 
         Enemy monster = (Enemy) cellCheck.getActor();
-        if(monster != null && monster.canBeStunned() && monster.isStunned() ){
+        if (monster != null && monster.canBeStunned() && monster.isStunned()) {
             cellCheck.setActor(null);
             health++;
             return monster;
@@ -132,10 +135,10 @@ public class Player extends Actor {
         return true;
     }
 
-    private Cell cellByDirection(){
+    private Cell cellByDirection() {
         Cell cellCheck;
 
-        switch( direction.getDirection() ){
+        switch (direction.getDirection()) {
             case 1:
                 cellCheck = cell.getNeighbor(0, -1);
                 break;
@@ -159,6 +162,16 @@ public class Player extends Actor {
         try {
             if (cell.getItem().getTileName() != null) {
                 Main.items.add(cell.getItem().getTileName());
+                Main.checkInventory(cell.getItem());
+                if (cell.getItem() instanceof Weapons) {
+                    changeAppearance((Weapons) cell.getItem());
+                    changeAttackPower((Weapons) cell.getItem());
+                } else if (cell.getItem() instanceof Shield) {
+                    this.shield = ((Shield) cell.getItem()).addShield();
+                }
+                else if (cell.getItem() instanceof FirstAid) {
+                    this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
+                }
                 cell.setItem(null);
             }
         } catch (NullPointerException e) {
@@ -174,5 +187,20 @@ public class Player extends Actor {
 
     private boolean isNextCellTeleportEntry(Cell nextCell) {
         return nextCell.getType().equals(CellType.TELEPORT_FIRST_STATE) || nextCell.getType().equals(CellType.TELEPORT_SECOND_STATE);
+    }
+
+    private void changeAttackPower(Weapons item) {
+        if (item.getTileName().equals("Axe")) {
+            setAttackPower(baseAttackPower + item.addAttackPower());
+        } else if (item.getTileName().equals("Sword"))
+            setAttackPower(baseAttackPower + item.addAttackPower());
+    }
+
+    private void changeAppearance(Weapons item) {
+        if (item instanceof Sword) {
+            this.stateName = "player with sword";
+        } else if (item instanceof Axe) {
+            this.stateName = "player with axe";
+        }
     }
 }

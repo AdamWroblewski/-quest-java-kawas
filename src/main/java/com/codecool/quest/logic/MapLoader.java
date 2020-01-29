@@ -2,6 +2,7 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Ghost;
 import com.codecool.quest.logic.actors.Player;
+import com.codecool.quest.logic.actors.PossessedSecurity;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.inventory.*;
 
@@ -54,6 +55,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.addMonster(new Ghost(cell) );
                             break;
+                        case 'p':
+                            cell.setType(CellType.FLOOR);
+                            map.addMonster(new PossessedSecurity(cell));
+                            break;
                         case '@':
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
@@ -69,6 +74,10 @@ public class MapLoader {
                         case 'K':
                             cell.setType(CellType.FLOOR);
                             new Keys(cell, "Yellow");
+                            break;
+                        case 'h':
+                            cell.setType(CellType.FLOOR);
+                            new FirstAid(cell);
                             break;
                         case 'w':
                             cell.setType(CellType.FLOOR);

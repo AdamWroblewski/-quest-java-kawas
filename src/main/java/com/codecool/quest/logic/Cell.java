@@ -8,6 +8,7 @@ public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     private Item item;
+    private Notes noteChar;
     private GameMap gameMap;
     private int x, y;
 
@@ -19,12 +20,14 @@ public class Cell implements Drawable {
         this.x = x;
         this.y = y;
         this.type = type;
+        noteChar = null;
     }
 
     public Cell(GameMap gameMap, int x, int y) {
         this.gameMap = gameMap;
         this.x = x;
         this.y = y;
+        noteChar = null;
     }
 
     public CellType getType() {
@@ -43,6 +46,10 @@ public class Cell implements Drawable {
         this.item = item;
     }
 
+    public void setNote(Notes note){
+        noteChar = note;
+    }
+
     public Actor getActor() {
         return actor;
     }
@@ -51,8 +58,16 @@ public class Cell implements Drawable {
         return item;
     }
 
+    public Notes getNote(){
+        return noteChar;
+    }
+
     public Cell getNeighbor(int dx, int dy) {
         return gameMap.getCell(x + dx, y + dy);
+    }
+
+    public void printChar(String tileName){
+        noteChar = new Notes(this, tileName);
     }
 
     @Override

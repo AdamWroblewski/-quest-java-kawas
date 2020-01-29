@@ -7,12 +7,15 @@ import com.codecool.quest.logic.GameRandom;
 
 public abstract class Enemy extends Actor {
     protected Directions direction = Directions.INPLACE;
+    protected int staggerCounter = 0;
+    protected double viewDistance;
     protected boolean stunned;
 
     Enemy(Cell cell){
         super(cell);
         stunned = false;
         attackPower = 5;
+        viewDistance = 7.0;
     }
 
     @Override
@@ -36,7 +39,7 @@ public abstract class Enemy extends Actor {
         double distanceToPlayer;
         distanceToPlayer = Math.sqrt(playerToMonsterDx*playerToMonsterDx + playerToMonsterDy*playerToMonsterDy);
 
-        Directions pathDirection = gameRandom.randMove(playerToMonsterDx, playerToMonsterDy, distanceToPlayer);
+        Directions pathDirection = gameRandom.randMove(playerToMonsterDx, playerToMonsterDy, distanceToPlayer, viewDistance);
 
         int dx = 0, dy = 0;
         switch( pathDirection.getDirection() ){
@@ -64,7 +67,14 @@ public abstract class Enemy extends Actor {
     }
 
     public abstract void setFightOn();
-    public abstract boolean setStunnedState();
+    public boolean setStunnedState(){
+        if(health < 1) {
+            stunned = true;
+            staggerCounter = 4;// remaining turns in stagger state;
+            stateName = "staggerState";
+        }
+        return false;
+    }
 
     public boolean isStunned(){
         return stunned;
