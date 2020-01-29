@@ -55,6 +55,7 @@ public class Tiles {
         tileMap.put("Sword", new Tile(2, 28));
         tileMap.put("Axe", new Tile(8, 29));
         tileMap.put("First Aid", new Tile(23, 22));
+        tileMap.put("Quad damage", new Tile(27, 24));
 
 
         /* Letters: */

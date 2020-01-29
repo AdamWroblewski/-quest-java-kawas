@@ -87,6 +87,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Axe(cell);
                             break;
+                        case 'Q':
+                            cell.setType(CellType.FLOOR);
+                            new Quad(cell);
+                            break;
                         case 'f':
                             cell.setType(CellType.STAIRSDOWN);
                             break;
