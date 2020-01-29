@@ -38,8 +38,9 @@ public class Tiles {
         tileMap.put("ghostHidden", new Tile(1, 0));
         tileMap.put("Possessed security", new Tile(25, 9));
 
-
-
+        /*map objects*/
+        tileMap.put("teleport first state", new Tile(1, 9));
+        tileMap.put("teleport second state", new Tile(1, 8));
         tileMap.put("left bridgehead", new Tile(15, 5));
         tileMap.put("right bridgehead", new Tile(18, 5));
         tileMap.put("bridge", new Tile(16, 5));
