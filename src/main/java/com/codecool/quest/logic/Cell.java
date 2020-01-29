@@ -2,6 +2,7 @@ package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.inventory.Item;
+import com.codecool.quest.logic.inventory.Quad;
 
 public class Cell implements Drawable {
 
@@ -65,6 +66,14 @@ public class Cell implements Drawable {
 
     public void printChar(String tileName){
         noteChar = new Notes(this, tileName);
+    }
+
+    public void useExtras(){
+        if(item != null && item instanceof Quad){
+            Quad quad = (Quad) item;
+            gameMap.setTimer(quad.getTimerValue());
+            quad.keepShieldValue(actor.getShield());
+        }
     }
 
     @Override
