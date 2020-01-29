@@ -232,9 +232,16 @@ public class Main extends Application {
                 } else {
                     Tiles.drawTile(context, cell, includedCellX, includedCellY);
                 }
+                if (isMonstersMoved) {
+                    if (cell.getType() == CellType.TELEPORT_FIRST_STATE) {
+                        cell.setType(CellType.TELEPORT_SECOND_STATE);
+                    } else if (cell.getType() == CellType.TELEPORT_SECOND_STATE) {
+                        cell.setType(CellType.TELEPORT_FIRST_STATE);
+                    }
+                }
             }
+            healthLabel.setText("" + map.getPlayer().getHealth());
         }
-        healthLabel.setText("" + map.getPlayer().getHealth());
     }
 
     private boolean mapIsBiggerThanScreen() {
