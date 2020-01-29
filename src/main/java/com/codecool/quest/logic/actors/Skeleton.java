@@ -4,14 +4,13 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameRandom;
 
 public class Skeleton extends Enemy {
-    private int staggerCounter = 0;
     private boolean fightOn = false;
 
     public Skeleton(Cell cell) {
         super(cell);
         stateName = "skeleton";
         health = 50;
-
+        viewDistance = 6.0;
     }
 
 
@@ -45,15 +44,6 @@ public class Skeleton extends Enemy {
         fightOn = true;
     }
 
-    @Override
-    public boolean setStunnedState(){
-        if(health < 1) {
-            stunned = true;
-            staggerCounter = 4;// turns left in stagger state;
-            stateName = "staggerState";
-        }
-        return false;
-    }
     public void unsetStunnedState(){
         health = 40;
         stunned = false;

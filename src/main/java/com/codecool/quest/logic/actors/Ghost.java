@@ -13,6 +13,7 @@ public class Ghost extends Enemy {
         health = 50;
         stunned = true;
         attackPower = 3;
+        viewDistance = 8.0;
     }
 
     @Override
