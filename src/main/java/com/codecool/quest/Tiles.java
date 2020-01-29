@@ -36,7 +36,7 @@ public class Tiles {
         tileMap.put("ghost1", new Tile(26, 6));
         tileMap.put("ghost2", new Tile(27, 6));
         tileMap.put("ghostHidden", new Tile(1, 0));
-        tileMap.put("Possessed security", new Tile(25, 9));
+        tileMap.put("Possessed security", new Tile(31, 6));
 
         tileMap.put("closeddoor Blue", new Tile(0, 9));
         tileMap.put("openeddoor Blue", new Tile(2, 9));
