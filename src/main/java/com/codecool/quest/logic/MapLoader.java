@@ -117,7 +117,7 @@ public class MapLoader {
                         case '\\':
                             cell.setType(CellType.LEFT_BRIDGEHEAD);
                             break;
-                        case '-':
+                        case '|':
                             cell.setType(CellType.BRIDGE);
                             break;
                         case '/':
@@ -128,6 +128,15 @@ public class MapLoader {
                             break;
                         case '"':
                             cell.setType(CellType.TELEPORT_SECOND_STATE);
+                            break;
+                        case '-':
+                            cell.setType(CellType.TELEPORT_TARGET_FIRST_STATE);
+                            break;
+                        case '_':
+                            cell.setType(CellType.TELEPORT_TARGET_SECOND_STATE);
+                            break;
+                        case '=':
+                            cell.setType(CellType.TELEPORT_TARGET_THIRD_STATE);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
