@@ -124,19 +124,20 @@ public class MapLoader {
                             cell.setType(CellType.RIGHT_BRIDGEHEAD);
                             break;
                         case '\'':
-                            cell.setType(CellType.TELEPORT_FIRST_STATE);
+                                cell.setType(CellType.TELEPORT_FIRST_STATE);
                             break;
                         case '"':
                             cell.setType(CellType.TELEPORT_SECOND_STATE);
                             break;
                         case '-':
-                            cell.setType(CellType.TELEPORT_TARGET_FIRST_STATE);
+                            cell.setType(CellType.TELEPORT_EXIT_FIRST_STATE);
+                            cell.setTeleportExitCords(x, y);
                             break;
                         case '_':
-                            cell.setType(CellType.TELEPORT_TARGET_SECOND_STATE);
+                            cell.setType(CellType.TELEPORT_EXIT_SECOND_STATE);
                             break;
                         case '=':
-                            cell.setType(CellType.TELEPORT_TARGET_THIRD_STATE);
+                            cell.setType(CellType.TELEPORT_EXIT_THIRD_STATE);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
@@ -146,5 +147,4 @@ public class MapLoader {
         }
         return map;
     }
-
 }
