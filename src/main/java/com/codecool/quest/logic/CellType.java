@@ -29,9 +29,9 @@ public enum CellType {
     WATER_LOWER_EDGE("water lower edge"),
     TELEPORT_FIRST_STATE("teleport first state"),
     TELEPORT_SECOND_STATE("teleport second state"),
-    TELEPORT_TARGET_FIRST_STATE("teleport second state"),
-    TELEPORT_TARGET_SECOND_STATE("teleport second state"),
-    TELEPORT_TARGET_THIRD_STATE("teleport second state");
+    TELEPORT_TARGET_FIRST_STATE("teleport target first state"),
+    TELEPORT_TARGET_SECOND_STATE("teleport target second state"),
+    TELEPORT_TARGET_THIRD_STATE("teleport target third state");
 
 
     private final String tileName;
