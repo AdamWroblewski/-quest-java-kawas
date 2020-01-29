@@ -70,6 +70,18 @@ public class Tiles {
         tileMap.put("V", new Tile(27, 31));
         tileMap.put("W", new Tile(28, 31));
         tileMap.put("Y", new Tile(30, 31));
+
+        /* Numbers: */
+        tileMap.put("0", new Tile(19, 29));
+        tileMap.put("1", new Tile(20, 29));
+        tileMap.put("2", new Tile(21, 29));
+        tileMap.put("3", new Tile(22, 29));
+        tileMap.put("4", new Tile(23, 29));
+        tileMap.put("5", new Tile(24, 29));
+        tileMap.put("6", new Tile(25, 29));
+        tileMap.put("7", new Tile(26, 29));
+        tileMap.put("8", new Tile(27, 29));
+        tileMap.put("9", new Tile(28, 29));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
