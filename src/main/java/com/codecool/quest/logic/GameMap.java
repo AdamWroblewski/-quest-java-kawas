@@ -28,6 +28,7 @@ public class GameMap {
             }
         }
         monsters = new ArrayList<>();
+printMessage(0, 1, "G", "A", "M", "E");
     }
 
     public Cell getCell(int x, int y) {
@@ -42,6 +43,9 @@ public class GameMap {
         return player;
     }
 
+    public void setChar(){
+        new Notes(cells[1][1]);
+    }
     public void addMonster(Enemy monster){
         monsters.add(monster);
     }
@@ -74,6 +78,20 @@ public class GameMap {
         monsters.remove(monster);
         return true;
     }
+
+    public void printMessage(int row, int col, String... chars){
+        int colStep = col;
+        for(String character: chars){
+            cells[colStep][row].printChar(character);
+            colStep++;
+        }
+    }
+    public void clearMessage(int row, int col, int strLength){
+        int colStep = col, i;
+        for(i = 0; i < strLength; i++, colStep++)
+            cells[colStep][row].setNote(null);
+    }
+
 
     public int getWidth() {
         return width;
