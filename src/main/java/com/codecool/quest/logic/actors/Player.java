@@ -18,13 +18,14 @@ public class Player extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        if(health < 1)
+        if (health < 1)
             return;
-
         Cell nextCell = cell.getNeighbor(dx, dy);
         Actor actor = nextCell.getActor();
-        if ((nextCell.getType().equals(CellType.FLOOR) && actor == null) || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)
-            || nextCell.getType().equals(CellType.OPENEDDOOR_YELLOW)) {
+        if ((nextCell.getType().equals(CellType.FLOOR) && actor == null)
+                || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)
+                || nextCell.getType().equals(CellType.OPENEDDOOR_YELLOW)
+                || isNextCellTeleportExit(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -37,6 +38,10 @@ public class Player extends Actor {
         } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR_YELLOW)) && Main.items.contains("key Yellow")) {
             Main.items.remove("key Yellow");
             nextCell.setType(CellType.OPENEDDOOR_YELLOW);
+        } else if (isNextCellTeleportEntry(nextCell)) {
+            int targetCellX = cell.getTeleportExitX() - nextCell.getX() + dx;
+            int targetCellY = cell.getTeleportExitY() - nextCell.getY() + dy;
+            this.move(targetCellX, targetCellY);
         }
         direction.setDirection(dx, dy);
     }
@@ -150,15 +155,24 @@ public class Player extends Actor {
         return cellCheck;
     }
 
-    public void pickUpItem(){
-        try{
-            if(cell.getItem().getTileName() != null){
+    public void pickUpItem() {
+        try {
+            if (cell.getItem().getTileName() != null) {
                 Main.items.add(cell.getItem().getTileName());
                 cell.setItem(null);
             }
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e + " caused by pickUpItem method when no item is on current cell");
         }
     }
 
+    private boolean isNextCellTeleportExit(Cell nextCell) {
+        return nextCell.getType().equals(CellType.TELEPORT_EXIT_FIRST_STATE) ||
+                nextCell.getType().equals(CellType.TELEPORT_EXIT_SECOND_STATE) ||
+                nextCell.getType().equals(CellType.TELEPORT_EXIT_THIRD_STATE);
+    }
+
+    private boolean isNextCellTeleportEntry(Cell nextCell) {
+        return nextCell.getType().equals(CellType.TELEPORT_FIRST_STATE) || nextCell.getType().equals(CellType.TELEPORT_SECOND_STATE);
+    }
 }
