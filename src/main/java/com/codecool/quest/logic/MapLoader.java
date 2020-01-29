@@ -75,6 +75,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Keys(cell, "Yellow");
                             break;
+                        case 'h':
+                            cell.setType(CellType.FLOOR);
+                            new FirstAid(cell);
+                            break;
                         case 'w':
                             cell.setType(CellType.FLOOR);
                             new Sword(cell);

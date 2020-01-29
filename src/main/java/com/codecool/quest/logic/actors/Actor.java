@@ -1,8 +1,7 @@
 package com.codecool.quest.logic.actors;
 
+import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.Drawable;
 
 public abstract class Actor implements Drawable {
@@ -10,6 +9,12 @@ public abstract class Actor implements Drawable {
     protected Cell cell;
     protected int health = 100;
     protected int shield = 0;
+    protected int baseAttackPower = 10;
+
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
     protected int attackPower = 10;
     protected String stateName;
 
@@ -36,6 +41,7 @@ public abstract class Actor implements Drawable {
     public Cell getCell() {
         return cell;
     }
+
     public void setCEll(Cell newCell){
         cell = newCell;
     }
@@ -59,11 +65,20 @@ public abstract class Actor implements Drawable {
             health -= healthDecrease;
         } else if(health > 0){
             health -= attackForce;
+            Main.items.remove("Shield");
         }
         return health > 0;
     }
     public boolean changeHealth(int healthGrow){
         health += healthGrow;
         return health > 0;
+    }
+
+    public int getShield(){
+        return shield;
+    }
+
+    public int getAttackPower(){
+        return attackPower;
     }
 }
