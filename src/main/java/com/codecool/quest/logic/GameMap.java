@@ -55,6 +55,9 @@ public class GameMap {
     }
 
     public void playerFight(){
+        if(player.getHealth() < 1)
+            return;
+
         Enemy monster = player.shoot();
         if(monster == null)
             return;

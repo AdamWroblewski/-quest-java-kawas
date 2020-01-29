@@ -14,10 +14,6 @@ public class Skeleton extends Enemy {
 
     }
 
-    @Override
-    public String getTileName() {
-        return stateName;
-    }
 
     @Override
     public void move(int dx, int dy) {
@@ -43,10 +39,6 @@ public class Skeleton extends Enemy {
         return distance;
     }
 
-    @Override
-    public boolean isPlayer(){
-        return false;
-    }
 
     @Override
     public void setFightOn(){
@@ -57,7 +49,7 @@ public class Skeleton extends Enemy {
     public boolean setStunnedState(){
         if(health < 1) {
             stunned = true;
-            staggerCounter = 4;
+            staggerCounter = 4;// turns left in stagger state;
             stateName = "staggerState";
         }
         return false;

@@ -11,12 +11,16 @@ public abstract class Actor implements Drawable {
     protected int health = 100;
     protected int shield = 0;
     protected int attackPower = 10;
+    protected String stateName;
 
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
     }
 
+    public String getTileName(){
+        return stateName;
+    }
     public abstract void move(int dx, int dy);
 
     public abstract boolean isPlayer();
@@ -49,7 +53,7 @@ public abstract class Actor implements Drawable {
             }
             shield -= shieldDecrease;
             health -= healthDecrease;
-        } else {
+        } else if(health > 0){
             health -= attackForce;
         }
         return health > 0;

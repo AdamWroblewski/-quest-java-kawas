@@ -36,6 +36,7 @@ public class Tiles {
         tileMap.put("ghost1", new Tile(26, 6));
         tileMap.put("ghost2", new Tile(27, 6));
         tileMap.put("ghostHidden", new Tile(1, 0));
+        tileMap.put("Possessed security", new Tile(25, 9));
 
         tileMap.put("closeddoor Blue", new Tile(0, 9));
         tileMap.put("openeddoor Blue", new Tile(2, 9));
@@ -53,6 +54,22 @@ public class Tiles {
         tileMap.put("tree", new Tile(0, 1));
         tileMap.put("Sword", new Tile(2, 28));
         tileMap.put("Axe", new Tile(8, 29));
+
+        /* Letters: */
+        tileMap.put("A", new Tile(19, 30));
+        tileMap.put("E", new Tile(23, 30));
+        tileMap.put("G", new Tile(25, 30));
+        tileMap.put("I", new Tile(29, 30));
+        tileMap.put("L", new Tile(30, 30));
+        tileMap.put("M", new Tile(31, 30));
+        tileMap.put("N", new Tile(19, 31));
+        tileMap.put("O", new Tile(20, 31));
+        tileMap.put("R", new Tile(23, 31));
+        tileMap.put("S", new Tile(24, 31));
+        tileMap.put("U", new Tile(26, 31));
+        tileMap.put("V", new Tile(27, 31));
+        tileMap.put("W", new Tile(28, 31));
+        tileMap.put("Y", new Tile(30, 31));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
