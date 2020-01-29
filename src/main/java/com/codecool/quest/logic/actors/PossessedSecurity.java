@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.GameRandom;
 
 public class PossessedSecurity extends Enemy {
 	private int staggerCounter = 0;
@@ -10,6 +11,30 @@ public class PossessedSecurity extends Enemy {
 		stateName = "Possessed security";
 		health = 70;
 		shield = 20;
+	}
+
+	@Override
+	public void move(int dx, int dy) {
+		if(stunned) {
+			staggerCounter--;
+			if(staggerCounter == 0) unsetStunnedState();
+			return;
+		}
+
+		super.move(dx, dy);
+	}
+
+	@Override
+	public double moveToPlayer(Player player, GameRandom gameRandom){
+		double distance = 0.0;
+		if(stunned){
+			staggerCounter--;
+			if(staggerCounter == 0) unsetStunnedState();
+			return distance;
+		}
+
+		distance = super.moveToPlayer(player, gameRandom);
+		return distance;
 	}
 
 	@Override
@@ -27,7 +52,8 @@ public class PossessedSecurity extends Enemy {
 		return false;
 	}
 	public void unsetStunnedState(){
-		health = 40;
+		health = 60;
+		shield = 20;
 		stunned = false;
 		stateName = "Possessed security";
 	}
