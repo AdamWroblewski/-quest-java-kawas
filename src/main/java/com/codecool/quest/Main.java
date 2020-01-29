@@ -233,14 +233,29 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell, includedCellX, includedCellY);
                 }
                 if (isMonstersMoved) {
-                    if (cell.getType() == CellType.TELEPORT_FIRST_STATE) {
-                        cell.setType(CellType.TELEPORT_SECOND_STATE);
-                    } else if (cell.getType() == CellType.TELEPORT_SECOND_STATE) {
-                        cell.setType(CellType.TELEPORT_FIRST_STATE);
-                    }
+                    changeTeleportEntryState(cell);
+                    changeTeleportExitState(cell);
                 }
             }
             healthLabel.setText("" + map.getPlayer().getHealth());
+        }
+    }
+
+    private void changeTeleportExitState(Cell cell) {
+        if (cell.getType() == CellType.TELEPORT_EXIT_FIRST_STATE) {
+            cell.setType(CellType.TELEPORT_EXIT_SECOND_STATE);
+        } else if (cell.getType() == CellType.TELEPORT_EXIT_SECOND_STATE) {
+            cell.setType(CellType.TELEPORT_EXIT_THIRD_STATE);
+        } else if (cell.getType() == CellType.TELEPORT_EXIT_THIRD_STATE) {
+            cell.setType(CellType.TELEPORT_EXIT_FIRST_STATE);
+        }
+    }
+
+    private void changeTeleportEntryState(Cell cell) {
+        if (cell.getType() == CellType.TELEPORT_FIRST_STATE) {
+            cell.setType(CellType.TELEPORT_SECOND_STATE);
+        } else if (cell.getType() == CellType.TELEPORT_SECOND_STATE) {
+            cell.setType(CellType.TELEPORT_FIRST_STATE);
         }
     }
 
