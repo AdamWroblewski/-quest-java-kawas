@@ -123,6 +123,12 @@ public class MapLoader {
                         case '/':
                             cell.setType(CellType.RIGHT_BRIDGEHEAD);
                             break;
+                        case '\'':
+                            cell.setType(CellType.TELEPORT_FIRST_STATE);
+                            break;
+                        case '"':
+                            cell.setType(CellType.TELEPORT_SECOND_STATE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
