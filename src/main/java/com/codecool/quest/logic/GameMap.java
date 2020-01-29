@@ -87,10 +87,18 @@ public class GameMap {
             colStep++;
         }
     }
+    /**
+     * Prints message from row of game map = row  and from column of game map = col;
+     *
+     * @param row of the map;
+     * @param col of the map;
+     * @param message: a list of chars which have to be included in Tile class
+     *               with the same k value as the char in string;
+     */
     public void printMessage(int row, int col, String message){
-        int colStep = col, i, n = message.length();
         try {
-            for (i = 0; i < n; i++, colStep++) {
+            int colStep = col, n = message.length();
+            for (int i = 0; i < n; i++, colStep++) {
                 String s = "" + message.charAt(i);
                 cells[colStep][row].printChar(s);
             }
@@ -98,12 +106,24 @@ public class GameMap {
             System.out.println("printMessage error: " + e.getMessage());
         }
     }
+    /**
+     * Clears all strLength chars from the map starting from row = row and column = col to the left of the map;
+     *
+     * @param row: row to start from;
+     * @param col: column to start from;
+     * @param strLength: the length of chars to clear
+     */
     public void clearMessage(int row, int col, int strLength){
         int colStep = col, i;
         for(i = 0; i < strLength; i++, colStep++)
             cells[colStep][row].setNote(null);
     }
 
+    /**
+     * Sets timer into timeFrames and prints in on the upper left corner of the map;
+     *
+     * @param timeFrames
+     */
     public void setTimer(int timeFrames){
         timer = timeFrames;
 
@@ -112,6 +132,9 @@ public class GameMap {
         clearMessage(0, 1, 5);
         printMessage(0, 1, timeStr);
     }
+    /**
+     * Deceases the timer and prints its new value on the upper left corner of the map;
+     */
     public void countTimer(){
         if(timer < 1)
             return;
