@@ -26,7 +26,9 @@ public enum CellType {
     WATER_LEFT_EDGE("water left edge"),
     WATER_RIGHT_EDGE("water right edge"),
     WATER_UPPER_EDGE("water upper edge"),
-    WATER_LOWER_EDGE("water lower edge");
+    WATER_LOWER_EDGE("water lower edge"),
+    TELEPORT_FIRST_STATE("teleport first state"),
+    TELEPORT_SECOND_STATE("teleport second state");
 
 
     private final String tileName;
