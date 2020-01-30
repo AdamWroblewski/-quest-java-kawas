@@ -1,9 +1,8 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Enemy;
 import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.Skeleton;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +42,7 @@ public class GameMap {
         if(player.isDead() ){
             printMessage(0, 1, "GAME");
             printMessage(0, 6, "O", "V", "E", "R");
+            cells[11][0].printChar("sad");
         }
         return player;
     }
@@ -51,11 +51,12 @@ public class GameMap {
         monsters.add(monster);
     }
 
-    public boolean moveMonsters(){
-        ListIterator<Enemy> iter = monsters.listIterator();
-        while(iter.hasNext() ){
-            iter.next().moveToPlayer(player, gameRandom);
-        }
+    public boolean moveMonsters() {
+        Platform.runLater(() -> {
+            for (Enemy monster : monsters) {
+                monster.moveToPlayer(player, gameRandom);
+            }
+        });
         return true;
     }
 
@@ -136,8 +137,10 @@ public class GameMap {
      * Deceases the timer and prints its new value on the upper left corner of the map;
      */
     public void countTimer(){
-        if(timer < 1)
+        if(timer < 1) {
+            player.setBasePlayerStats();
             return;
+        }
 
         timer--;
         String timeStr = Integer.toString(timer);

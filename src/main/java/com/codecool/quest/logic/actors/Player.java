@@ -12,10 +12,18 @@ public class Player extends Actor {
     private Directions direction = Directions.INPLACE;
     private int[] coordinates = new int[2];
     private int countMonsters = 0;
+    /* Values to set to back on when extras work ends: */
+    private int healthToReset;
+    private int shieldToReset;
+    private int attackPowerToReset;
+    private boolean extrasIsReceived = false;
 
 
     public Player(Cell cell) {
         super(cell);
+        healthToReset = health;
+        shieldToReset = shield;
+        attackPowerToReset = attackPower;
         stateName = getStateName();
         health = getTempHealth();
         shield = getTempShield();
@@ -89,6 +97,14 @@ public class Player extends Actor {
             this.move(targetCellX, targetCellY);
         }
         direction.setDirection(dx, dy);
+    }
+
+    @Override
+    protected boolean getAttacked(int attackForce){
+        if(extrasIsReceived)
+            health = healthToReset;
+
+        return super.getAttacked(attackForce);
     }
 
     private Enemy neighbourMonster(int dx, int dy) {
@@ -215,11 +231,32 @@ public class Player extends Actor {
                 } else if (cell.getItem() instanceof FirstAid) {
                     this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
                     Main.tempHealth += ((FirstAid) cell.getItem()).getHealthIncrease();
+                } else if(cell.getItem() instanceof Quad){
+                    Quad quad = (Quad) cell.getItem();
+                    /* keep old values: */
+                    healthToReset = quad.getPreviousHealth(health);
+                    shieldToReset = quad.getPreviousShield(shield);
+                    attackPowerToReset = quad.getPreviousAttackPower(attackPower);
+                    /* set current values based on picked extras: */
+                    health = quad.getActiveHealth(health);
+                    shield = quad.getActiveShield(shield);
+                    attackPower = quad.getActiveAttackPower(baseAttackPower);
+                    extrasIsReceived = true;
+                    cell.useExtras();
                 }
                 cell.setItem(null);
             }
         } catch (NullPointerException e) {
             System.out.println(e + " caused by pickUpItem method when no item is on current cell");
+        }
+    }
+
+    public void setBasePlayerStats(){
+        if(extrasIsReceived) {
+            health = healthToReset;
+            shield = shieldToReset;
+            attackPower = attackPowerToReset;
+            extrasIsReceived = false;
         }
     }
 
