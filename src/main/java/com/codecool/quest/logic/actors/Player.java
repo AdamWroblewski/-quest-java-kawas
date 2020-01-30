@@ -162,7 +162,6 @@ public class Player extends Actor {
     public void pickUpItem() {
         try {
             if (cell.getItem().getTileName() != null) {
-                Main.items.add(cell.getItem().getTileName());
                 Main.checkInventory(cell.getItem());
                 if (cell.getItem() instanceof Weapons) {
                     changeAppearance((Weapons) cell.getItem());
