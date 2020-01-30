@@ -26,4 +26,14 @@ public class Quad extends Item {
     public int getTimerValue(){
         return timerValue;
     }
+
+    public int getPreviousHealth(int oldHealth){
+        return 100;
+    }
+    public int getPreviousShield(int oldShield){
+        return oldShield;
+    }
+    public int getPreviousAttackPower(int oldAttackPower){
+        return oldAttackPower;
+    }
 }

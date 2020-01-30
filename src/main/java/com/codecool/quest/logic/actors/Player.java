@@ -175,6 +175,11 @@ public class Player extends Actor {
                 }
                 else if (cell.getItem() instanceof FirstAid) {
                     this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
+                } else if(cell.getItem() instanceof Quad){
+                    healthToReset = health;
+                    shieldToReset = shield;
+                    attackPowerToReset = baseAttackPower;
+                    cell.useExtras();
                 }
                 cell.setItem(null);
             }
