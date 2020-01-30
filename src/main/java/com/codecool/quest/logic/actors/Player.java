@@ -16,6 +16,7 @@ public class Player extends Actor {
     private int healthToReset;
     private int shieldToReset;
     private int attackPowerToReset;
+    private boolean extrasIsReceived = false;
 
     public Player(Cell cell) {
         super(cell);
@@ -200,6 +201,7 @@ public class Player extends Actor {
                     health = quad.getActiveHealth(health);
                     shield = quad.getActiveShield(shield);
                     attackPower = quad.getActiveAttackPower(baseAttackPower);
+                    extrasIsReceived = true;
                     cell.useExtras();
                 }
                 cell.setItem(null);
@@ -210,9 +212,12 @@ public class Player extends Actor {
     }
 
     public void setBasePlayerStats(){
-        health = healthToReset;
-        shield = shieldToReset;
-        attackPower = attackPowerToReset;
+        if(extrasIsReceived) {
+            health = healthToReset;
+            shield = shieldToReset;
+            attackPower = attackPowerToReset;
+            extrasIsReceived = false;
+        }
     }
 
     private boolean isNextCellTeleportExit(Cell nextCell) {
