@@ -42,6 +42,7 @@ public class GameMap {
         if(player.isDead() ){
             printMessage(0, 1, "GAME");
             printMessage(0, 6, "O", "V", "E", "R");
+            cells[11][0].printChar("sad");
         }
         return player;
     }

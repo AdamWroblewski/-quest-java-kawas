@@ -61,6 +61,11 @@ public class Main extends Application {
     public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
 
+
+    public static int tempShield = 0;
+    public static int tempHealth = 0;
+    public static int tempAttackPower = 0;
+
     Task<Void> moveMonsters = new Task<>() {
         @Override
         protected Void call() throws Exception {
@@ -245,7 +250,8 @@ public class Main extends Application {
         return (map.getPlayer().getX() - map.getWidth()) * -1 <= xAxisMiddle;
     }
 
-    private boolean playerIsNearLeftBorder() {
+    private boolean playerIsNearLeftBorder()
+    {
         return map.getPlayer().getX() < xAxisMiddle;
     }
 
@@ -278,6 +284,8 @@ public class Main extends Application {
                 }
             }
             healthLabel.setText("" + map.getPlayer().getHealth());
+            shield.setText("" + map.getPlayer().getTempShield());
+            attackPower.setText("" + map.getPlayer().getAttackPower());
         }
     }
 
@@ -297,8 +305,8 @@ public class Main extends Application {
         } else if (cell.getType() == CellType.TELEPORT_SECOND_STATE) {
             cell.setType(CellType.TELEPORT_FIRST_STATE);
         }
-        healthLabel.setText("" + map.getPlayer().getHealth());
-        shield.setText("" + map.getPlayer().getShield());
+        healthLabel.setText("" + map.getPlayer().getTempHealth());
+        shield.setText("" + map.getPlayer().getTempShield());
         attackPower.setText("" + map.getPlayer().getAttackPower());
     }
 

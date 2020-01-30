@@ -18,13 +18,43 @@ public class Player extends Actor {
     private int attackPowerToReset;
     private boolean extrasIsReceived = false;
 
+
     public Player(Cell cell) {
         super(cell);
         healthToReset = health;
         shieldToReset = shield;
         attackPowerToReset = attackPower;
         stateName = getStateName();
+        health = getTempHealth();
+        shield = getTempShield();
+        attackPower = getTempAttackPower();
+        Main.tempAttackPower = health;
     }
+
+    private int getTempAttackPower() {
+        if (Main.tempAttackPower == 0){
+            return attackPower;
+        }else{
+            return Main.tempAttackPower;
+        }
+    }
+
+    public int getTempShield() {
+        if (Main.tempShield == 0){
+            return shield;
+        }else{
+            return Main.tempShield;
+        }
+    }
+
+    public int getTempHealth() {
+        if (Main.tempHealth == 0){
+            return health;
+        }else{
+            return Main.tempHealth;
+        }
+    }
+
 
     private String getStateName() {
         if (Main.items.contains("Axe")) {
@@ -197,8 +227,10 @@ public class Player extends Actor {
                     changeAttackPower((Weapons) cell.getItem());
                 } else if (cell.getItem() instanceof Shield) {
                     this.shield = ((Shield) cell.getItem()).addShield();
+                    Main.tempShield = ((Shield) cell.getItem()).addShield();
                 } else if (cell.getItem() instanceof FirstAid) {
                     this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
+                    Main.tempHealth += ((FirstAid) cell.getItem()).getHealthIncrease();
                 } else if(cell.getItem() instanceof Quad){
                     Quad quad = (Quad) cell.getItem();
                     /* keep old values: */
@@ -245,10 +277,8 @@ public class Player extends Actor {
     }
 
     private void changeAttackPower(Weapons item) {
-        if (item.getTileName().equals("Axe")) {
             setAttackPower(baseAttackPower + item.addAttackPower());
-        } else if (item.getTileName().equals("Sword"))
-            setAttackPower(baseAttackPower + item.addAttackPower());
+            Main.tempAttackPower = baseAttackPower + item.addAttackPower();
     }
 
     private void changeAppearance(Weapons item) {

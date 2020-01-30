@@ -63,8 +63,15 @@ public abstract class Actor implements Drawable {
             }
             shield -= shieldDecrease;
             health -= healthDecrease;
+            if(this instanceof Player){
+                Main.tempHealth = health;
+                Main.tempShield = shield;
+            }
         } else if(health > 0){
             health -= attackForce;
+            if(this instanceof Player){
+                Main.tempHealth = health;
+            }
             Main.items.remove("Shield");
         }
         return health > 0;
