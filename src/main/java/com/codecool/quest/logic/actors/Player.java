@@ -69,6 +69,14 @@ public class Player extends Actor {
         direction.setDirection(dx, dy);
     }
 
+    @Override
+    protected boolean getAttacked(int attackForce){
+        if(extrasIsReceived)
+            health = healthToReset;
+
+        return super.getAttacked(attackForce);
+    }
+
     private Enemy neighbourMonster(int dx, int dy) {
         Cell cellCheck = cell.getNeighbor(dx, dy);
         Enemy monster = null;
