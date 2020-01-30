@@ -8,6 +8,7 @@ import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.inventory.FirstAid;
 import com.codecool.quest.logic.inventory.Item;
+import com.codecool.quest.logic.inventory.Keys;
 import com.codecool.quest.logic.inventory.Weapons;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -110,11 +111,11 @@ public class Main extends Application {
                 items.add(item.getTileName());
             }
         }
-        else {
-            if ((!item.getTileName().equals("First Aid")) &&
-                    (item.getTileName().equals("Shield") && !items.contains("Shield"))) {
-                items.add(item.getTileName());
-            }
+        else if (item instanceof Keys) {
+            items.add(item.getTileName());
+        }
+        else if ((item.getTileName().equals("Shield") && !items.contains("Shield"))) {
+            items.add(item.getTileName());
         }
     }
 
