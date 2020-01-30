@@ -19,6 +19,9 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         stateName = "player";
+        healthToReset = health;
+        shieldToReset = shield;
+        attackPowerToReset = attackPower;
     }
 
     @Override
@@ -178,9 +181,9 @@ public class Player extends Actor {
                 } else if(cell.getItem() instanceof Quad){
                     Quad quad = (Quad) cell.getItem();
                     /* keep old values: */
-                    healthToReset = health;
-                    shieldToReset = shield;
-                    attackPowerToReset = attackPower;
+                    healthToReset = quad.getPreviousHealth(health);
+                    shieldToReset = quad.getPreviousShield(shield);
+                    attackPowerToReset = quad.getPreviousAttackPower(attackPower);
                     /* set current values based on picked extras: */
                     health = quad.getActiveHealth(health);
                     shield = quad.getActiveShield(shield);
@@ -192,6 +195,12 @@ public class Player extends Actor {
         } catch (NullPointerException e) {
             System.out.println(e + " caused by pickUpItem method when no item is on current cell");
         }
+    }
+
+    public void setBasePlayerStats(){
+        health = healthToReset;
+        shield = shieldToReset;
+        attackPower = attackPowerToReset;
     }
 
     private boolean isNextCellTeleportExit(Cell nextCell) {
