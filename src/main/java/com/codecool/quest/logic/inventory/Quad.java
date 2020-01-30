@@ -8,7 +8,7 @@ public class Quad extends Item {
 
     public Quad(Cell cell){
         super(cell);
-        timerValue = 150;
+        timerValue = 120;
     }
 
     @Override
