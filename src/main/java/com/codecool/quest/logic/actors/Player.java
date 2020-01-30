@@ -28,7 +28,6 @@ public class Player extends Actor {
         health = getTempHealth();
         shield = getTempShield();
         attackPower = getTempAttackPower();
-        Main.tempAttackPower = health;
     }
 
     private int getTempAttackPower() {
