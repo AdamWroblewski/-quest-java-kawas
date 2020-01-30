@@ -8,7 +8,7 @@ public class Quad extends Item {
 
     public Quad(Cell cell){
         super(cell);
-        timerValue = 50;
+        timerValue = 150;
     }
 
     @Override
@@ -27,6 +27,15 @@ public class Quad extends Item {
         return timerValue;
     }
 
+    public int getActiveHealth(int health){
+        return health;
+    }
+    public int getActiveShield(int shield){
+        return 200;
+    }
+    public int getActiveAttackPower(int attackPower){
+        return 300;
+    }
     public int getPreviousHealth(int oldHealth){
         return 100;
     }
