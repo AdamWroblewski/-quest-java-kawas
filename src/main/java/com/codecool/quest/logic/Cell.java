@@ -13,6 +13,9 @@ public class Cell implements Drawable {
     private GameMap gameMap;
     private int x, y;
 
+    private static int teleportExitX;
+    private static int teleportExitY;
+
     Cell(GameMap gameMap, int x, int y, CellType type) {
         this.gameMap = gameMap;
         this.x = x;
@@ -87,5 +90,18 @@ public class Cell implements Drawable {
 
     public int getY() {
         return y;
+    }
+
+    public void setTeleportExitCords(int x, int y) {
+        teleportExitX = x;
+        teleportExitY = y;
+    }
+
+    public int getTeleportExitX() {
+        return teleportExitX;
+    }
+
+    public int getTeleportExitY() {
+        return teleportExitY;
     }
 }
