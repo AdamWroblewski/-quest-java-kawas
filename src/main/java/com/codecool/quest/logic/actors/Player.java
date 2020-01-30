@@ -6,6 +6,7 @@ import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.inventory.*;
 
+
 public class Player extends Actor {
 
     private Directions direction = Directions.INPLACE;
@@ -18,11 +19,22 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
-        stateName = "player";
         healthToReset = health;
         shieldToReset = shield;
         attackPowerToReset = attackPower;
+        stateName = getStateName();
     }
+
+    private String getStateName() {
+        if (Main.items.contains("Axe")) {
+            return "player with axe";
+        } else if (Main.items.contains("Sword")) {
+            return "player with sword";
+        } else {
+            return "player";
+        }
+    }
+
 
     @Override
     public void move(int dx, int dy) {
@@ -33,7 +45,8 @@ public class Player extends Actor {
         if ((nextCell.getType().equals(CellType.FLOOR) && actor == null)
                 || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)
                 || nextCell.getType().equals(CellType.OPENEDDOOR_YELLOW)
-                || isNextCellTeleportExit(nextCell)) {
+                || isNextCellTeleportExit(nextCell)
+                || isNextCellBridge(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -175,8 +188,7 @@ public class Player extends Actor {
                     changeAttackPower((Weapons) cell.getItem());
                 } else if (cell.getItem() instanceof Shield) {
                     this.shield = ((Shield) cell.getItem()).addShield();
-                }
-                else if (cell.getItem() instanceof FirstAid) {
+                } else if (cell.getItem() instanceof FirstAid) {
                     this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
                 } else if(cell.getItem() instanceof Quad){
                     Quad quad = (Quad) cell.getItem();
@@ -207,6 +219,12 @@ public class Player extends Actor {
         return nextCell.getType().equals(CellType.TELEPORT_EXIT_FIRST_STATE) ||
                 nextCell.getType().equals(CellType.TELEPORT_EXIT_SECOND_STATE) ||
                 nextCell.getType().equals(CellType.TELEPORT_EXIT_THIRD_STATE);
+    }
+
+    private boolean isNextCellBridge(Cell nextCell) {
+        return nextCell.getType().equals(CellType.BRIDGE) ||
+                nextCell.getType().equals(CellType.LEFT_BRIDGEHEAD) ||
+                nextCell.getType().equals(CellType.RIGHT_BRIDGEHEAD);
     }
 
     private boolean isNextCellTeleportEntry(Cell nextCell) {
