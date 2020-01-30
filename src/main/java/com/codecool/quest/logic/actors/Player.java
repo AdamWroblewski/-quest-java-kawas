@@ -26,7 +26,8 @@ public class Player extends Actor {
         if ((nextCell.getType().equals(CellType.FLOOR) && actor == null)
                 || nextCell.getType().equals(CellType.OPENEDDOOR_BLUE)
                 || nextCell.getType().equals(CellType.OPENEDDOOR_YELLOW)
-                || isNextCellTeleportExit(nextCell)) {
+                || isNextCellTeleportExit(nextCell)
+                || isNextCellBridge(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -183,6 +184,12 @@ public class Player extends Actor {
         return nextCell.getType().equals(CellType.TELEPORT_EXIT_FIRST_STATE) ||
                 nextCell.getType().equals(CellType.TELEPORT_EXIT_SECOND_STATE) ||
                 nextCell.getType().equals(CellType.TELEPORT_EXIT_THIRD_STATE);
+    }
+
+    private boolean isNextCellBridge(Cell nextCell) {
+        return nextCell.getType().equals(CellType.BRIDGE) ||
+                nextCell.getType().equals(CellType.LEFT_BRIDGEHEAD) ||
+                nextCell.getType().equals(CellType.RIGHT_BRIDGEHEAD);
     }
 
     private boolean isNextCellTeleportEntry(Cell nextCell) {
