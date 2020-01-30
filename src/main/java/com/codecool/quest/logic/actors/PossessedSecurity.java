@@ -10,6 +10,7 @@ public class PossessedSecurity extends Enemy {
 		stateName = "Possessed security";
 		health = 70;
 		shield = 20;
+		attackPower = 7;
 		viewDistance = 12.0;
 	}
 

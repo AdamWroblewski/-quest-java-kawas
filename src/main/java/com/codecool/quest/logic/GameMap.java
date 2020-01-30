@@ -136,8 +136,10 @@ public class GameMap {
      * Deceases the timer and prints its new value on the upper left corner of the map;
      */
     public void countTimer(){
-        if(timer < 1)
+        if(timer < 1) {
+            player.setBasePlayerStats();
             return;
+        }
 
         timer--;
         String timeStr = Integer.toString(timer);

@@ -12,9 +12,16 @@ public class Player extends Actor {
     private Directions direction = Directions.INPLACE;
     private int[] coordinates = new int[2];
     private int countMonsters = 0;
+    /* Values to set to back on when extras work ends: */
+    private int healthToReset;
+    private int shieldToReset;
+    private int attackPowerToReset;
 
     public Player(Cell cell) {
         super(cell);
+        healthToReset = health;
+        shieldToReset = shield;
+        attackPowerToReset = attackPower;
         stateName = getStateName();
     }
 
@@ -183,12 +190,29 @@ public class Player extends Actor {
                     this.shield = ((Shield) cell.getItem()).addShield();
                 } else if (cell.getItem() instanceof FirstAid) {
                     this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
+                } else if(cell.getItem() instanceof Quad){
+                    Quad quad = (Quad) cell.getItem();
+                    /* keep old values: */
+                    healthToReset = quad.getPreviousHealth(health);
+                    shieldToReset = quad.getPreviousShield(shield);
+                    attackPowerToReset = quad.getPreviousAttackPower(attackPower);
+                    /* set current values based on picked extras: */
+                    health = quad.getActiveHealth(health);
+                    shield = quad.getActiveShield(shield);
+                    attackPower = quad.getActiveAttackPower(baseAttackPower);
+                    cell.useExtras();
                 }
                 cell.setItem(null);
             }
         } catch (NullPointerException e) {
             System.out.println(e + " caused by pickUpItem method when no item is on current cell");
         }
+    }
+
+    public void setBasePlayerStats(){
+        health = healthToReset;
+        shield = shieldToReset;
+        attackPower = attackPowerToReset;
     }
 
     private boolean isNextCellTeleportExit(Cell nextCell) {
