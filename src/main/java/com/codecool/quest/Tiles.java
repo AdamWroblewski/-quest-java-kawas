@@ -38,6 +38,24 @@ public class Tiles {
         tileMap.put("ghostHidden", new Tile(1, 0));
         tileMap.put("Possessed security", new Tile(31, 6));
 
+        /*map objects*/
+        tileMap.put("teleport exit first state", new Tile(20, 24));
+        tileMap.put("teleport exit second state", new Tile(21, 24));
+        tileMap.put("teleport exit third state", new Tile(21, 23));
+        tileMap.put("teleport first state", new Tile(1, 9));
+        tileMap.put("teleport second state", new Tile(1, 8));
+        tileMap.put("left bridgehead", new Tile(15, 5));
+        tileMap.put("right bridgehead", new Tile(18, 5));
+        tileMap.put("bridge", new Tile(16, 5));
+        tileMap.put("water", new Tile(8, 5));
+        tileMap.put("water upper left corner", new Tile(9, 4));
+        tileMap.put("water lower left corner", new Tile(9, 6));
+        tileMap.put("water upper right corner", new Tile(11, 4));
+        tileMap.put("water lower right corner", new Tile(11, 6));
+        tileMap.put("water left edge", new Tile(9, 5));
+        tileMap.put("water right edge", new Tile(11, 5));
+        tileMap.put("water upper edge", new Tile(10, 4));
+        tileMap.put("water lower edge", new Tile(10, 6));
         tileMap.put("closeddoor Blue", new Tile(0, 9));
         tileMap.put("openeddoor Blue", new Tile(2, 9));
         tileMap.put("closeddoor Yellow", new Tile(1, 11));

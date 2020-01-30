@@ -96,6 +96,58 @@ public class MapLoader {
                         case 't':
                             cell.setType(CellType.TREE);
                             break;
+                        case ',':
+                            cell.setType(CellType.WATER);
+                            break;
+                        case '(':
+                            cell.setType(CellType.WATER_LEFT_EDGE);
+                            break;
+                        case ')':
+                            cell.setType(CellType.WATER_RIGHT_EDGE);
+                            break;
+                        case '[':
+                            cell.setType(CellType.WATER_UPPER_EDGE);
+                            break;
+                        case ']':
+                            cell.setType(CellType.WATER_LOWER_EDGE);
+                            break;
+                        case '<':
+                            cell.setType(CellType.WATER_LOWER_LEFT_CORNER);
+                            break;
+                        case '>':
+                            cell.setType(CellType.WATER_LOWER_RIGHT_CORNER);
+                            break;
+                        case '{':
+                            cell.setType(CellType.WATER_UPPER_LEFT_CORNER);
+                            break;
+                        case '}':
+                            cell.setType(CellType.WATER_UPPER_RIGHT_CORNER);
+                            break;
+                        case '\\':
+                            cell.setType(CellType.LEFT_BRIDGEHEAD);
+                            break;
+                        case '|':
+                            cell.setType(CellType.BRIDGE);
+                            break;
+                        case '/':
+                            cell.setType(CellType.RIGHT_BRIDGEHEAD);
+                            break;
+                        case '\'':
+                                cell.setType(CellType.TELEPORT_FIRST_STATE);
+                            break;
+                        case '"':
+                            cell.setType(CellType.TELEPORT_SECOND_STATE);
+                            break;
+                        case '-':
+                            cell.setType(CellType.TELEPORT_EXIT_FIRST_STATE);
+                            cell.setTeleportExitCords(x, y);
+                            break;
+                        case '_':
+                            cell.setType(CellType.TELEPORT_EXIT_SECOND_STATE);
+                            break;
+                        case '=':
+                            cell.setType(CellType.TELEPORT_EXIT_THIRD_STATE);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
@@ -104,5 +156,4 @@ public class MapLoader {
         }
         return map;
     }
-
 }
