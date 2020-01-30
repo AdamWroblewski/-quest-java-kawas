@@ -6,6 +6,7 @@ import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.inventory.*;
 
+
 public class Player extends Actor {
 
     private Directions direction = Directions.INPLACE;
@@ -14,8 +15,20 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
-        stateName = "player";
+        stateName = getStateName();
+        System.out.println(Main.items.toString());
     }
+
+    private String getStateName() {
+        if (Main.items.contains("Axe")) {
+            return "player with axe";
+        } else if (Main.items.contains("Sword")) {
+            return "player with sword";
+        } else {
+            return "player";
+        }
+    }
+
 
     @Override
     public void move(int dx, int dy) {
@@ -168,8 +181,7 @@ public class Player extends Actor {
                     changeAttackPower((Weapons) cell.getItem());
                 } else if (cell.getItem() instanceof Shield) {
                     this.shield = ((Shield) cell.getItem()).addShield();
-                }
-                else if (cell.getItem() instanceof FirstAid) {
+                } else if (cell.getItem() instanceof FirstAid) {
                     this.health += ((FirstAid) cell.getItem()).getHealthIncrease();
                 }
                 cell.setItem(null);
