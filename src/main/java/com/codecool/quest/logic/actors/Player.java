@@ -16,7 +16,6 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         stateName = getStateName();
-        System.out.println(Main.items.toString());
     }
 
     private String getStateName() {
