@@ -1,12 +1,14 @@
-package com.codecool.quest.logic;
+package com.codecool.quest;
 
-import com.codecool.quest.logic.actors.Enemy;
-import com.codecool.quest.logic.actors.Player;
+import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.GameRandom;
+import com.codecool.quest.model.CellType;
+import com.codecool.quest.model.actors.Enemy;
+import com.codecool.quest.model.actors.Player;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class GameMap {
     private int width;

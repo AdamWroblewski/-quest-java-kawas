@@ -1,10 +1,12 @@
-package com.codecool.quest.logic;
+package com.codecool.quest;
 
-import com.codecool.quest.logic.actors.Ghost;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.PossessedSecurity;
-import com.codecool.quest.logic.actors.Skeleton;
-import com.codecool.quest.logic.inventory.*;
+import com.codecool.quest.logic.Cell;
+import com.codecool.quest.model.CellType;
+import com.codecool.quest.model.actors.Ghost;
+import com.codecool.quest.model.actors.Player;
+import com.codecool.quest.model.actors.PossessedSecurity;
+import com.codecool.quest.model.actors.Skeleton;
+import com.codecool.quest.model.inventory.*;
 
 
 import java.io.InputStream;

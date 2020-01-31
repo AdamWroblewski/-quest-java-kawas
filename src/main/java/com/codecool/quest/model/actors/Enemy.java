@@ -1,7 +1,7 @@
-package com.codecool.quest.logic.actors;
+package com.codecool.quest.model.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
+import com.codecool.quest.model.CellType;
 import com.codecool.quest.logic.Directions;
 import com.codecool.quest.logic.GameRandom;
 
@@ -66,7 +66,6 @@ public abstract class Enemy extends Actor {
         return false;
     }
 
-    public abstract void setFightOn();
     public boolean setStunnedState(){
         if(health < 1) {
             stunned = true;

@@ -1,10 +1,10 @@
-package com.codecool.quest.logic.actors;
+package com.codecool.quest.model.actors;
 
 import com.codecool.quest.Main;
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
+import com.codecool.quest.model.CellType;
 import com.codecool.quest.logic.Directions;
-import com.codecool.quest.logic.inventory.*;
+import com.codecool.quest.model.inventory.*;
 
 
 public class Player extends Actor {
@@ -82,7 +82,6 @@ public class Player extends Actor {
             cell = nextCell;
         } else if (actor != null && !actor.isPlayer()) {
             Enemy monster = (Enemy) actor;
-            monster.setFightOn();
         } else if ((nextCell.getType().equals(CellType.CLOSEDDOOR_BLUE)) && Main.items.contains("key Blue")) {
             Main.items.remove("key Blue");
             nextCell.setType(CellType.OPENEDDOOR_BLUE);

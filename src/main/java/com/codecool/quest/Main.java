@@ -1,15 +1,11 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.GameMap;
-import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.inventory.FirstAid;
-import com.codecool.quest.logic.inventory.Item;
-import com.codecool.quest.logic.inventory.Keys;
-import com.codecool.quest.logic.inventory.Weapons;
+import com.codecool.quest.model.CellType;
+import com.codecool.quest.model.inventory.Item;
+import com.codecool.quest.model.inventory.Keys;
+import com.codecool.quest.model.inventory.Weapons;
+import com.codecool.quest.view.Tiles;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -27,7 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;

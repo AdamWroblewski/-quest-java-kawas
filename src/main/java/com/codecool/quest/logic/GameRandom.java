@@ -1,5 +1,7 @@
 package com.codecool.quest.logic;
 
+import com.codecool.quest.logic.Directions;
+
 import java.util.Random;
 
 public class GameRandom {

@@ -1,4 +1,4 @@
-package com.codecool.quest.logic.inventory;
+package com.codecool.quest.model.inventory;
 
 import com.codecool.quest.logic.Cell;
 

@@ -1,7 +1,7 @@
-package com.codecool.quest.logic.inventory;
+package com.codecool.quest.model.inventory;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.model.Drawable;
 
 
 public abstract class Item implements Drawable {

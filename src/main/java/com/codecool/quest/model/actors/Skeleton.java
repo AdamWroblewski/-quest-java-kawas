@@ -1,4 +1,4 @@
-package com.codecool.quest.logic.actors;
+package com.codecool.quest.model.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameRandom;
@@ -36,12 +36,6 @@ public class Skeleton extends Enemy {
 
         distance = super.moveToPlayer(player, gameRandom);
         return distance;
-    }
-
-
-    @Override
-    public void setFightOn(){
-        fightOn = true;
     }
 
     public void unsetStunnedState(){

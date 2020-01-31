@@ -1,4 +1,4 @@
-package com.codecool.quest.logic;
+package com.codecool.quest.model;
 
 public interface Drawable {
     String getTileName();

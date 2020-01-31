@@ -1,8 +1,12 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Actor;
-import com.codecool.quest.logic.inventory.Item;
-import com.codecool.quest.logic.inventory.Quad;
+import com.codecool.quest.GameMap;
+import com.codecool.quest.model.CellType;
+import com.codecool.quest.model.Drawable;
+import com.codecool.quest.model.Notes;
+import com.codecool.quest.model.actors.Actor;
+import com.codecool.quest.model.inventory.Item;
+import com.codecool.quest.model.inventory.Quad;
 
 public class Cell implements Drawable {
 
@@ -16,7 +20,7 @@ public class Cell implements Drawable {
     private static int teleportExitX;
     private static int teleportExitY;
 
-    Cell(GameMap gameMap, int x, int y, CellType type) {
+    public Cell(GameMap gameMap, int x, int y, CellType type) {
         this.gameMap = gameMap;
         this.x = x;
         this.y = y;

@@ -1,7 +1,6 @@
-package com.codecool.quest.logic.actors;
+package com.codecool.quest.model.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.GameRandom;
 
 public class Ghost extends Enemy {
@@ -38,10 +37,6 @@ public class Ghost extends Enemy {
 
         return distanceToPlayer;
     }
-
-
-    @Override
-    public void setFightOn(){}
 
     @Override
     public boolean setStunnedState(){
