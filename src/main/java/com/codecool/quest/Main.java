@@ -56,11 +56,13 @@ public class Main extends Application {
     public static ObservableList<String> items = FXCollections.observableArrayList();
     ListView<String> listView = new ListView<String>(items);
 
-
+    // fixme ???? why is that here?
     public static int tempShield = 0;
     public static int tempHealth = 0;
     public static int tempAttackPower = 0;
 
+
+    // todo google Runnable, Thread
     Task<Void> moveMonsters = new Task<>() {
         @Override
         protected Void call() throws Exception {
@@ -96,6 +98,8 @@ public class Main extends Application {
         launch(args);
     }
 
+    // fixme refactor
+    // todo wrong class
     public static void checkInventory(Item item) {
         if (item instanceof Weapons) {
             if (item.getTileName().equals("Axe") && items.contains("Sword")) {
@@ -119,6 +123,7 @@ public class Main extends Application {
         }
     }
 
+    // todo divide into more methods
     @Override
     public void start(Stage primaryStage) throws Exception {
         GridPane ui = new GridPane();
@@ -150,7 +155,7 @@ public class Main extends Application {
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
 
-
+        // todo move to new method
         Thread threadMonstersMove = new Thread(moveMonsters);
         Thread threadRefreshMap = new Thread(refresh);
 
@@ -285,6 +290,7 @@ public class Main extends Application {
     }
 
     private void changeTeleportExitState(Cell cell) {
+        // todo maybe iterate?
         if (cell.getType() == CellType.TELEPORT_EXIT_FIRST_STATE) {
             cell.setType(CellType.TELEPORT_EXIT_SECOND_STATE);
         } else if (cell.getType() == CellType.TELEPORT_EXIT_SECOND_STATE) {

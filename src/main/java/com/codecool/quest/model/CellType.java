@@ -1,8 +1,5 @@
 package com.codecool.quest.model;
 
-import java.util.Arrays;
-import java.util.Random;
-
 public enum CellType {
 
     EMPTY("empty"),

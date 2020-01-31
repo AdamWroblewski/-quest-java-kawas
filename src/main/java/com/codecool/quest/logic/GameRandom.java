@@ -1,7 +1,5 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.Directions;
-
 import java.util.Random;
 
 public class GameRandom {
@@ -59,6 +57,7 @@ public class GameRandom {
 		return stepVectorToDirection(dx, dy);
 	}
 
+	// todo should be in directions
 	private Directions stepVectorToDirection(final double dx, final double dy){
 		int direction = 4;// like in CSS: 1 - up, 2 - right, 3 - down, 4 - left;
 		if(Math.abs(dy) > Math.abs(dx) ){

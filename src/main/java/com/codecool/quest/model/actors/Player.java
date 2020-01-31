@@ -187,11 +187,11 @@ public class Player extends Actor {
 
         return null;
     }
-
-    @Override
-    public boolean isPlayer() {
-        return true;
-    }
+//
+//    @Override
+//    public boolean isPlayer() {
+//        return true;
+//    }
 
     private Cell cellByDirection() {
         Cell cellCheck;

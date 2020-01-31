@@ -1,5 +1,6 @@
 package com.codecool.quest.logic;
 
+// fixme this holds only ONE direction at once, not all of them
 public enum Directions {
 	INPLACE(0),
 	UP(1),// (dx, dy) = {0, -1;};
@@ -7,6 +8,7 @@ public enum Directions {
 	DOWN(3),// 0, 1;
 	LEFT(4);// -1, 0;
 
+	// todo should be enum, not int
 	private int direction;
 
 	Directions(){

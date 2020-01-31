@@ -1,7 +1,6 @@
 package com.codecool.quest.model;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.model.Drawable;
 
 public class Notes implements Drawable {
 	private Cell cell;

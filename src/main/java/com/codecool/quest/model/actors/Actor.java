@@ -5,32 +5,39 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.model.Drawable;
 
 public abstract class Actor implements Drawable {
-
+    // todo: first consts, then fields
     protected Cell cell;
     protected int health = 100;
     protected int shield = 0;
     protected int baseAttackPower = 10;
-
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
-
     protected int attackPower = 10;
+    // fixme this shouldn't be a plaintext string
     protected String stateName;
 
+    // todo then constructor
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
     }
 
-    public String getTileName(){
+    // todo then other methods
+    public void setAttackPower(int attackPower) {
+        this.attackPower = attackPower;
+    }
+
+    // todo getters and setters at the very bottom
+    // fixme this shouldn't be a plaintext string
+    public String getTileName() {
         return stateName;
     }
+
     public abstract void move(int dx, int dy);
 
-    public abstract boolean isPlayer();
+    public boolean isPlayer() {
+        return this instanceof Player;
+    }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return health < 1;
     }
 
@@ -54,6 +61,7 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
+    // todo a 'get' method should return what it's called
     protected boolean getAttacked(int attackForce){
         if(shield > 0){
             int healthDecrease = (health > 1)?1:0, shieldDecrease = attackForce - healthDecrease;
@@ -64,6 +72,7 @@ public abstract class Actor implements Drawable {
             shield -= shieldDecrease;
             health -= healthDecrease;
             if(this instanceof Player){
+                // todo this shouldn't be held as a field in the Main class
                 Main.tempHealth = health;
                 Main.tempShield = shield;
             }

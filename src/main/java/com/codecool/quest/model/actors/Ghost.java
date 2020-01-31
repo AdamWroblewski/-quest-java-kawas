@@ -31,9 +31,8 @@ public class Ghost extends Enemy {
     @Override
     public double moveToPlayer(Player player, GameRandom gameRandom){
         double distanceToPlayer = super.moveToPlayer(player, gameRandom);
-        hidden = true;
-        if(distanceToPlayer < 5.5)
-            hidden = false;
+        // todo fix magic numbers
+        hidden = !(distanceToPlayer < 5.5);
 
         return distanceToPlayer;
     }

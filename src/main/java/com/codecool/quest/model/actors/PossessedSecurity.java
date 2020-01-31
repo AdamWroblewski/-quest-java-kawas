@@ -4,16 +4,16 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameRandom;
 
 public class PossessedSecurity extends Enemy {
+	protected int defaultAttackPower = 7;
 
 	public PossessedSecurity(Cell cell){
 		super(cell);
 		stateName = "Possessed security";
 		health = 70;
 		shield = 20;
-		attackPower = 7;
 		viewDistance = 12.0;
 	}
-
+	
 	@Override
 	public void move(int dx, int dy) {
 		if(stunned) {

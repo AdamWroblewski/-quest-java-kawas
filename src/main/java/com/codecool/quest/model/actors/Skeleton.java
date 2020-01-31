@@ -37,7 +37,7 @@ public class Skeleton extends Enemy {
         distance = super.moveToPlayer(player, gameRandom);
         return distance;
     }
-
+    // todo fix magic numbers
     public void unsetStunnedState(){
         health = 40;
         stunned = false;

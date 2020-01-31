@@ -16,7 +16,7 @@ public class Cell implements Drawable {
     private Notes noteChar;
     private GameMap gameMap;
     private int x, y;
-
+    // todo move to teleport cell class
     private static int teleportExitX;
     private static int teleportExitY;
 

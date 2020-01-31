@@ -42,6 +42,7 @@ public class GameMap {
 
     public Player getPlayer() {
         if(player.isDead() ){
+            // todo fix magic numbers
             printMessage(0, 1, "GAME");
             printMessage(0, 6, "O", "V", "E", "R");
             cells[11][0].printChar("sad");
@@ -74,13 +75,13 @@ public class GameMap {
         if(isKilled)
             monsters.remove(monster);
     }
-    public boolean playerFinishesOff(){
+
+    public void playerFinishesOff(){
         Enemy monster = (Enemy) player.gloryKill();
         if(monster == null)
-            return false;
+            return;
 
         monsters.remove(monster);
-        return true;
     }
 
     public void printMessage(int row, int col, String... chars){
@@ -101,8 +102,11 @@ public class GameMap {
     public void printMessage(int row, int col, String message){
         try {
             int colStep = col, n = message.length();
+            // todo don't create objects in a loop, create them outside
+            // todo use stringbuilder or stringbuffer instead of string
+            String s;
             for (int i = 0; i < n; i++, colStep++) {
-                String s = "" + message.charAt(i);
+                s = String.valueOf(message.charAt(i));
                 cells[colStep][row].printChar(s);
             }
         } catch(NullPointerException e){
@@ -117,8 +121,8 @@ public class GameMap {
      * @param strLength: the length of chars to clear
      */
     public void clearMessage(int row, int col, int strLength){
-        int colStep = col, i;
-        for(i = 0; i < strLength; i++, colStep++)
+        int colStep = col;
+        for(int i = 0; i < strLength; i++, colStep++)
             cells[colStep][row].setNote(null);
     }
 
@@ -146,7 +150,7 @@ public class GameMap {
 
         timer--;
         String timeStr = Integer.toString(timer);
-
+        // todo fix magic numbers -> why 0,1,5 ? maybe get an object you print and remove?
         clearMessage(0, 1, 5);
         if(timer > 0)
             printMessage(0, 1, timeStr);

@@ -14,6 +14,7 @@ public class Tiles {
     private static Map<String, Tile> tileMap = new HashMap<>();
 
     public static class Tile {
+        // todo w = width, h = height, x,y = x_coord, y_coord
         public final int x, y, w, h;
         Tile(int i, int j) {
             x = i * (TILE_WIDTH + 2);
